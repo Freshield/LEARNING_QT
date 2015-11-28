@@ -17,6 +17,9 @@ private:
         QLabel *label1, *label2;
         QLineEdit *lineEdit;
         QPushButton *button;
+private slots:
+        void showArea();
+
 };
 
 #endif // DIALOG_H
