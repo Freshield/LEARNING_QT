@@ -21,6 +21,8 @@ public:
 private slots:
     void on_countBtm_clicked();
 
+    void on_radiusLineEdit_textChanged(const QString &arg1);
+
 private:
     QLabel *label1,*label2;
     QLineEdit *lineEdit;
