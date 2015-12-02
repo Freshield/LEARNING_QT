@@ -7,6 +7,8 @@ DEMO::DEMO(QWidget *parent) :
     ui(new Ui::DEMO)
 {
     ui->setupUi(this);
+
+
     QString str1 = "WELCOME";
     ui->label->setText(str1);
     str1 = str1+" TO YOU!";
@@ -52,6 +54,39 @@ DEMO::DEMO(QWidget *parent) :
     qDebug()<<QString().isEmpty();
     qDebug()<<QString("").isNull();
     qDebug()<<QString("").isEmpty();
+
+    QList<QString>list;
+    {
+        QString strt("TEST");
+        list<<strt;
+    }
+    qDebug()<<list[0]<<"how are you";
+
+    QMap<QString,QString>map;
+    {
+        map.insert("beijing","111");
+        map.insert("shanghai","021");
+        map.insert("nanjing","025");
+        QMapIterator<QString,QString>i(map);
+        for(;i.hasNext();)
+        {
+            qDebug()<<""<<i.key()<<""<<i.next().value();
+
+        }
+        QMutableMapIterator<QString,QString>mi(map);
+        if(mi.findNext("111"))
+        {
+            mi.setValue("010");
+        }
+        QMapIterator<QString,QString>modi(map);
+        qDebug()<<"";
+        for(;modi.hasNext();)
+        {
+            qDebug()<<""<<modi.key()<<""<<modi.next().value();
+        }
+    }
+
+
 
 
 
