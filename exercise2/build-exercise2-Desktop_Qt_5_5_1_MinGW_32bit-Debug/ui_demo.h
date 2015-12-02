@@ -17,6 +17,7 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QWidget>
 
@@ -32,6 +33,7 @@ public:
     QLabel *label_4;
     QLabel *label_5;
     QLabel *label_6;
+    QPushButton *pushButton;
     QMenuBar *menuBar;
     QStatusBar *statusBar;
 
@@ -72,6 +74,9 @@ public:
         label_6->setGeometry(QRect(80, 380, 621, 51));
         label_6->setFrameShape(QFrame::Panel);
         label_6->setFrameShadow(QFrame::Sunken);
+        pushButton = new QPushButton(centralWidget);
+        pushButton->setObjectName(QStringLiteral("pushButton"));
+        pushButton->setGeometry(QRect(240, 450, 291, 71));
         DEMO->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(DEMO);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -95,6 +100,7 @@ public:
         label_4->setText(QString());
         label_5->setText(QString());
         label_6->setText(QString());
+        pushButton->setText(QApplication::translate("DEMO", "QUIT", 0));
     } // retranslateUi
 
 };

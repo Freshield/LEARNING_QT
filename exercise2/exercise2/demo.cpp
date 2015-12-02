@@ -63,7 +63,7 @@ DEMO::DEMO(QWidget *parent) :
     qDebug()<<list[0]<<"how are you";
 
     QMap<QString,QString>map;
-    {
+
         map.insert("beijing","111");
         map.insert("shanghai","021");
         map.insert("nanjing","025");
@@ -84,7 +84,26 @@ DEMO::DEMO(QWidget *parent) :
         {
             qDebug()<<""<<modi.key()<<""<<modi.next().value();
         }
-    }
+        QVariant v(709);
+            qDebug()<<v.toInt();
+            QVariant w("How are you! ");
+            qDebug()<<w.toString();
+
+        double a = -19.3,b = 9.7;
+        double c = qAbs(a);
+        double max = qMax(b,c);
+
+        int bn = qRound(b);
+        int cn = qRound(c);
+
+        qDebug()<<a;
+        qDebug()<<b;
+        qDebug()<<c;
+        qDebug()<<max;
+        qDebug()<<bn;
+        qDebug()<<cn;
+
+        connect(ui->pushButton,SIGNAL(clicked()),this,SLOT(quit()));
 
 
 
