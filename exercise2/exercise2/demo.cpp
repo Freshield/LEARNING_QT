@@ -1,5 +1,6 @@
 #include "demo.h"
 #include "ui_demo.h"
+#include <QDebug>
 
 DEMO::DEMO(QWidget *parent) :
     QMainWindow(parent),
@@ -20,6 +21,38 @@ DEMO::DEMO(QWidget *parent) :
     QString str;
     str = QString("%1 was born in %2").arg("JOHN").arg(1982);
     ui->label_6->setText(str);
+
+    str.insert(4,"23333");
+    ui->label_6->setText(str);
+
+    str = " WELCOME \t TO \n YOU! ";
+    ui->label->setText(str);
+    str = str.simplified();
+    ui->label_2->setText(str);
+
+    str.startsWith("WELCOME",Qt::CaseSensitive);
+    str.startsWith("you",Qt::CaseSensitive);
+    str.contains("WELCOME",Qt::CaseSensitive);
+    str = "125";
+    bool ok;
+    int hex = str.toInt(&ok,16);
+    QString temp = QString("%1").arg(hex);
+    ui->label_3->setText(temp);
+    int dec = str.toInt(&ok,10);
+    temp = QString("%1").arg(dec);
+    ui->label_4->setText(temp);
+
+    str = "WELCOME TO YOUR";
+    qDebug()<<str;
+    QByteArray ba = str.toUtf8();
+    qDebug()<<ba.data();
+    ba.append("HELLO,WORLD");
+    qDebug()<<ba.data();
+    qDebug()<<QString().isNull();
+    qDebug()<<QString().isEmpty();
+    qDebug()<<QString("").isNull();
+    qDebug()<<QString("").isEmpty();
+
 
 
 
