@@ -43,6 +43,48 @@ int main(int argc, char *argv[])
     qDebug()<<QString("").isEmpty();
 
 
+    qDebug()<<"------------------------------------------------------";
+
+    qDebug()<<QObject::tr("below is to test search operation")<<endl;
+    str = "yafeilinux";
+    qDebug()<<QObject::tr("string is :")<<str;
+    qDebug()<<QObject::tr("include the right 5 words")<<str.right(5);
+    qDebug()<<QObject::tr("include the left 5 words")<<str.left(5);
+    qDebug()<<QObject::tr("include from the second word to the after 3 words")<<str.mid(2,3);
+    qDebug()<<QObject::tr("find fei")<<str.indexOf("fei");
+    qDebug()<<QObject::tr("the zero word of str")<<str.at(0);
+    qDebug()<<QObject::tr("the counts of i")<<str.count('i');
+    qDebug()<<QObject::tr("if str is begin as ya")<<str.startsWith("ya");
+    qDebug()<<QObject::tr("if str is end of linux")<<str.endsWith("linux");
+    qDebug()<<QObject::tr("if str include the string of lin")<<str.contains("lin");
+    QString temp = "hello";
+    if(temp>str)
+    {
+
+        qDebug()<<temp;
+    }
+    else
+    {
+
+        qDebug()<<str;
+    }
+
+    qDebug()<<"------------------------------------------------------";
+
+    qDebug()<<QObject::tr("below is to test change operation")<<endl;
+    str = "100";
+    qDebug()<<QObject::tr("string to int:")<<str.toInt();
+    int num = 45;
+    str = QString::number(num);
+    qDebug()<<QObject::tr("int to string:")<<str;
+
+
+
+
+
+
+
+
 
 
 
