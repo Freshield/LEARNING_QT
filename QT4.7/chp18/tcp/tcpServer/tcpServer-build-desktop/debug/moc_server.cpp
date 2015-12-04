@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'server.h'
 **
-** Created: Thu Dec 3 21:57:35 2015
+** Created: Fri Dec 4 16:53:59 2015
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.2)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_Server[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-       1,   14, // methods
+       4,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -32,12 +32,17 @@ static const uint qt_meta_data_Server[] = {
 
  // slots: signature, parameters, type, tag, flags
        8,    7,    7,    7, 0x08,
+      32,    7,    7,    7, 0x08,
+      46,    7,    7,    7, 0x08,
+      67,    7,    7,    7, 0x08,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_Server[] = {
-    "Server\0\0sendMessage()\0"
+    "Server\0\0on_pushButton_clicked()\0"
+    "readMessage()\0acceptedConnection()\0"
+    "displayError(QAbstractSocket::SocketError)\0"
 };
 
 const QMetaObject Server::staticMetaObject = {
@@ -69,10 +74,13 @@ int Server::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: sendMessage(); break;
+        case 0: on_pushButton_clicked(); break;
+        case 1: readMessage(); break;
+        case 2: acceptedConnection(); break;
+        case 3: displayError((*reinterpret_cast< QAbstractSocket::SocketError(*)>(_a[1]))); break;
         default: ;
         }
-        _id -= 1;
+        _id -= 4;
     }
     return _id;
 }

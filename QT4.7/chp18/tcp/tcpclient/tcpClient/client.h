@@ -32,6 +32,7 @@ private slots:
     void readMessage();
     void displayError(QAbstractSocket::SocketError);
     void on_connectButton_clicked();
+    void on_pushButton_clicked();
 };
 
 #endif // CLIENT_H

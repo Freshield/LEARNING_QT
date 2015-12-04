@@ -32,15 +32,12 @@ void Client::readMessage()
     QDataStream in(tcpSocket);
     in.setVersion(QDataStream::Qt_4_0);
 
-    qDebug() << "1" << in;
-
     if(blockSize == 0)
     {
         if(tcpSocket->bytesAvailable() < (int)sizeof(quint16))
         {
             return;
         }
-        qDebug() << "2" << in;
         in >> blockSize;
     }
 
@@ -49,13 +46,11 @@ void Client::readMessage()
         return;
     }
 
-    qDebug() << "3" << in;
-
     in >> message;
 
-    qDebug() << message;
-
     ui->messageLabel->setText(message);
+
+    blockSize = 0;
 
 
 }
@@ -76,4 +71,18 @@ void Client::displayError(QAbstractSocket::SocketError)
 void Client::on_connectButton_clicked()
 {
     newConnect();
+}
+
+void Client::on_pushButton_clicked()
+{
+    QByteArray block;
+    QDataStream out(&block,QIODevice::WriteOnly);
+
+    out.setVersion(QDataStream::Qt_4_0);
+    out<<(quint16)0;
+    out<<ui->sendLineEdit->text();
+    out.device()->seek(0);
+    out<<(quint16)(block.size() - sizeof(quint16));
+
+    tcpSocket->write(block);
 }

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'client.ui'
 **
-** Created: Thu Dec 3 22:28:47 2015
+** Created: Fri Dec 4 16:38:50 2015
 **      by: Qt User Interface Compiler version 4.7.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -31,6 +31,9 @@ public:
     QPushButton *connectButton;
     QLineEdit *hostLineEdit;
     QLineEdit *portLineEdit;
+    QPushButton *pushButton;
+    QLineEdit *sendLineEdit;
+    QLabel *label_3;
 
     void setupUi(QDialog *Client)
     {
@@ -39,22 +42,31 @@ public:
         Client->resize(871, 614);
         label = new QLabel(Client);
         label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(100, 140, 116, 34));
+        label->setGeometry(QRect(100, 50, 116, 34));
         label_2 = new QLabel(Client);
         label_2->setObjectName(QString::fromUtf8("label_2"));
-        label_2->setGeometry(QRect(100, 210, 116, 34));
+        label_2->setGeometry(QRect(100, 120, 116, 34));
         messageLabel = new QLabel(Client);
         messageLabel->setObjectName(QString::fromUtf8("messageLabel"));
-        messageLabel->setGeometry(QRect(100, 300, 441, 61));
+        messageLabel->setGeometry(QRect(90, 430, 441, 61));
         connectButton = new QPushButton(Client);
         connectButton->setObjectName(QString::fromUtf8("connectButton"));
-        connectButton->setGeometry(QRect(540, 410, 187, 57));
+        connectButton->setGeometry(QRect(640, 200, 187, 57));
         hostLineEdit = new QLineEdit(Client);
         hostLineEdit->setObjectName(QString::fromUtf8("hostLineEdit"));
-        hostLineEdit->setGeometry(QRect(220, 120, 491, 51));
+        hostLineEdit->setGeometry(QRect(220, 30, 491, 51));
         portLineEdit = new QLineEdit(Client);
         portLineEdit->setObjectName(QString::fromUtf8("portLineEdit"));
-        portLineEdit->setGeometry(QRect(220, 210, 491, 51));
+        portLineEdit->setGeometry(QRect(220, 120, 491, 51));
+        pushButton = new QPushButton(Client);
+        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        pushButton->setGeometry(QRect(650, 490, 187, 57));
+        sendLineEdit = new QLineEdit(Client);
+        sendLineEdit->setObjectName(QString::fromUtf8("sendLineEdit"));
+        sendLineEdit->setGeometry(QRect(220, 320, 471, 51));
+        label_3 = new QLabel(Client);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_3->setGeometry(QRect(100, 330, 116, 34));
 
         retranslateUi(Client);
 
@@ -70,6 +82,9 @@ public:
         connectButton->setText(QApplication::translate("Client", "connect", 0, QApplication::UnicodeUTF8));
         hostLineEdit->setText(QApplication::translate("Client", "127.0.0.1", 0, QApplication::UnicodeUTF8));
         portLineEdit->setText(QApplication::translate("Client", "2333", 0, QApplication::UnicodeUTF8));
+        pushButton->setText(QApplication::translate("Client", "send", 0, QApplication::UnicodeUTF8));
+        sendLineEdit->setText(QApplication::translate("Client", "hi", 0, QApplication::UnicodeUTF8));
+        label_3->setText(QApplication::translate("Client", "send:", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };
