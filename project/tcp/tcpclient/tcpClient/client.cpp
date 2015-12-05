@@ -10,6 +10,7 @@ Client::Client(QWidget *parent) :
 {
     ui->setupUi(this);
     tcpSocket = new QTcpSocket(this);
+    uidnum = "NULL";
     connect(tcpSocket,SIGNAL(readyRead()),this,SLOT(readMessage()));
     connect(tcpSocket,SIGNAL(error(QAbstractSocket::SocketError)),this,SLOT(displayError(QAbstractSocket::SocketError)));
 
@@ -51,7 +52,20 @@ void Client::readMessage()
 
     in >> message;
 
-    ui->messageLabel->setText(message);
+    //--------------------------------------------------------------//
+    //----------------FIGURE OUT THE MESSAGE------------------------//
+    //--------------------------------------------------------------//
+    //first connect
+    if(message[0] == '0' && message[1] == '-')
+    {
+        int place = message.indexOf("<uidnum>");
+        QString getter = message.mid(place+8,message.size()-place-8);
+        ui->uidnum_label->setText(getter);
+    }
+    else
+    {
+        ui->messageLabel->setText(message);
+    }
 
     blockSize = 0;
 
@@ -93,5 +107,6 @@ void Client::on_pushButton_clicked()
 void Client::ifconnected()
 {
     QMessageBox::information(this,tr("Connected"),tr("Connected successed"));
+    ui->connectButton->setEnabled(false);
     return;
 }

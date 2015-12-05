@@ -26,6 +26,7 @@ private:
     QTcpSocket *tcpSocket;
     QString message;
     quint16 blockSize;
+    QString uidnum;
 
 private slots:
     void newConnect();

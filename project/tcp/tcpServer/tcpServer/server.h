@@ -11,6 +11,20 @@
 
 class QTcpServer;
 
+//---------------UID-----------------------//
+struct UID
+{
+    QString name;
+    QString number;
+    QTcpSocket *sockets_value;
+    QString registed;
+
+};
+
+
+//---------------/UID-----------------------//
+
+
 namespace Ui {
     class Server;
 }
@@ -30,6 +44,11 @@ private:
     QTcpServer *m_server;//the server itself
     QList<clientjobs*> m_ClientList;//client class to save socket
     QStringList m_IPandPortList;//IPPort list
+    int UID_NUM;
+    QList<UID> uidlist;//
+
+    QByteArray pickup_data(QString data);
+    void send_to_client(QTcpSocket *socket, QString data);
 
 
 

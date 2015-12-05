@@ -13,6 +13,7 @@ Server::Server(QWidget *parent) :
     ui(new Ui::Server)
 {
     ui->setupUi(this);
+    UID_NUM = 100;
     //create new server
 
     m_server = new QTcpServer(this);
@@ -44,14 +45,7 @@ void Server::on_pushButton_clicked()
     }
     //process the block
 
-    QByteArray block;
-    QDataStream out(&block,QIODevice::WriteOnly);
-
-    out.setVersion(QDataStream::Qt_4_0);
-    out<<(quint16)0;
-    out<<ui->lineEdit->text();//here is the true string data
-    out.device()->seek(0);
-    out<<(quint16)(block.size() - sizeof(quint16));
+    QByteArray block = pickup_data(ui->lineEdit->text());
     //send block
 
     m_ClientList[m_Index]->SendBytes(block);
@@ -80,6 +74,7 @@ void Server::on_setButton_clicked()
     if(listenreturn)
     {
         QMessageBox::information(this,tr("Listen"),tr("Listen successed"));
+        ui->setButton->setEnabled(false);
         return;
     }
     else
@@ -97,14 +92,26 @@ void Server::onNewConnection()
     //get IP PORT
     QString strIPandPort = socknewer->peerAddress().toString()+tr("_%1").arg(socknewer->peerPort());
     m_IPandPortList.append(strIPandPort);
-    //show in list
-    ui->listWidget->addItem(strIPandPort);
+
     //begin constract new client
     clientjobs *newClientJobs = new clientjobs(this,socknewer,strIPandPort);
     //push in client list
     m_ClientList.append(newClientJobs);
+    //begin constract uid
+    UID newuid;
+    newuid.number = QString::number(UID_NUM);
+    UID_NUM++;
+    newuid.registed = "no";
+    newuid.sockets_value = socknewer;
 
-    //connect signal and slot
+    uidlist.append(newuid);
+    //show in list
+    ui->listWidget->addItem("Client:UID-"+newuid.number);
+    //tell client the uid num
+    QString message = "0-YOUR UID NUMBER IS:<uidnum>"+newuid.number;
+    send_to_client(newuid.sockets_value,message);
+
+
 
     //connect delete slot
     connect(newClientJobs,SIGNAL(CallMainWindowDeleteClient(QString)),this,SLOT(DeleteOneClient(QString)));
@@ -136,20 +143,36 @@ void Server::on_send_all_pushButton_clicked()
 
     //process the block
 
-    QByteArray block;
-    QDataStream out(&block,QIODevice::WriteOnly);
-
-    out.setVersion(QDataStream::Qt_4_0);
-    out<<(quint16)0;
-    out<<ui->lineEdit->text();//here is the true string data
-    out.device()->seek(0);
-    out<<(quint16)(block.size() - sizeof(quint16));
+    QByteArray block = pickup_data(ui->lineEdit->text());
     //send block
+
     for(int i = 0;i<m_ClientList.size();i++)
     {
         m_ClientList[i]->SendBytes(block);
 
     }
 
+}
+
+QByteArray Server::pickup_data(QString data)
+{
+    QByteArray block;
+    QDataStream out(&block,QIODevice::WriteOnly);
+
+    out.setVersion(QDataStream::Qt_4_0);
+    out<<(quint16)0;
+    out<<data;//here is the true string data
+    out.device()->seek(0);
+    out<<(quint16)(block.size() - sizeof(quint16));
+
+    return block;
+}
+
+void Server::send_to_client(QTcpSocket *socket, QString data)
+{
+    QByteArray block = pickup_data(data);
+    //send block
+
+    socket->write(block);
 
 }
