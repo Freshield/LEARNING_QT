@@ -8,6 +8,7 @@
 #include <QtNetwork>
 #include <QStringList>
 #include "clientjobs.h"
+#include "items.h"
 
 class QTcpServer;
 
@@ -51,6 +52,8 @@ private:
     QByteArray pickup_data(QString data);
     void send_to_client(QTcpSocket *socket, QString data);
 
+    //items *testitem;
+
 
 
 
@@ -61,9 +64,13 @@ private slots:
 
     void onNewConnection();//new connect
     void DeleteOneClient(QString strIPandPort);//delete client
+    //void OneItemTimeout(QString itemcode);
 
     void on_setButton_clicked();//set the port num
     void on_send_all_pushButton_clicked();
+    //void on_TestpushButton_clicked();
+
+    //void on_TestpushButton_2_clicked();
 };
 
 #endif // SERVER_H

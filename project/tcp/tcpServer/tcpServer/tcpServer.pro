@@ -12,10 +12,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         server.cpp \
-    clientjobs.cpp
+    clientjobs.cpp \
+    items.cpp
 
 HEADERS  += server.h \
-    clientjobs.h
+    clientjobs.h \
+    items.h
 
 FORMS    += server.ui
 

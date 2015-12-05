@@ -6,6 +6,7 @@
 #include <QByteArray>
 #include <QDebug>
 #include "clientjobs.h"
+#include "items.h"
 
 
 Server::Server(QWidget *parent) :
@@ -250,3 +251,22 @@ void Server::readMessage(QString strIPandPort,QString data)
 
 }
 
+/*
+void Server::on_TestpushButton_clicked()
+{
+    items *newitem = new items(this,"NULL","NULL","NULL","NULL","NULL","NULL");
+    testitem = newitem;
+    connect(newitem,SIGNAL(CallMainWindowTimeout(QString)),this,SLOT(OneItemTimeout(QString)));
+
+}
+
+void Server::OneItemTimeout(QString itemcode)
+{
+    QMessageBox::information(this,tr("ItemTimeout"),tr("ItemCode")+itemcode+tr("Timeout"));
+}
+
+void Server::on_TestpushButton_2_clicked()
+{
+    testitem->SetTimeagain();
+}
+*/
