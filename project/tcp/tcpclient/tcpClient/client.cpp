@@ -108,5 +108,10 @@ void Client::ifconnected()
 {
     QMessageBox::information(this,tr("Connected"),tr("Connected successed"));
     ui->connectButton->setEnabled(false);
+    ui->hostLineEdit->setEnabled(false);
+    ui->portLineEdit->setEnabled(false);
+    ui->regist_pushButton->setEnabled(true);
+    ui->sendLineEdit->setEnabled(true);
+    ui->messageLabel->setText(tr("Connect success,\nthen entre your name \nand press regist to regist first"));
     return;
 }

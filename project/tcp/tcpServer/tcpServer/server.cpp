@@ -75,6 +75,11 @@ void Server::on_setButton_clicked()
     {
         QMessageBox::information(this,tr("Listen"),tr("Listen successed"));
         ui->setButton->setEnabled(false);
+        ui->PortLineEdit->setEnabled(false);
+        ui->lineEdit->setEnabled(true);
+        ui->pushButton->setEnabled(true);
+        ui->send_all_pushButton->setEnabled(true);
+
         return;
     }
     else

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'server.ui'
 **
-** Created: Sat Dec 5 13:27:15 2015
+** Created: Sat Dec 5 15:08:07 2015
 **      by: Qt User Interface Compiler version 4.7.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -45,9 +45,11 @@ public:
         label->setGeometry(QRect(60, 440, 341, 191));
         lineEdit = new QLineEdit(Server);
         lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
+        lineEdit->setEnabled(false);
         lineEdit->setGeometry(QRect(400, 440, 421, 71));
         pushButton = new QPushButton(Server);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        pushButton->setEnabled(false);
         pushButton->setGeometry(QRect(400, 560, 187, 57));
         label_3 = new QLabel(Server);
         label_3->setObjectName(QString::fromUtf8("label_3"));
@@ -63,6 +65,7 @@ public:
         listWidget->setGeometry(QRect(90, 150, 671, 251));
         send_all_pushButton = new QPushButton(Server);
         send_all_pushButton->setObjectName(QString::fromUtf8("send_all_pushButton"));
+        send_all_pushButton->setEnabled(false);
         send_all_pushButton->setGeometry(QRect(640, 560, 187, 57));
 
         retranslateUi(Server);

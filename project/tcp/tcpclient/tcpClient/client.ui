@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1017</width>
-    <height>811</height>
+    <width>1027</width>
+    <height>818</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <property name="geometry">
     <rect>
      <x>120</x>
-     <y>130</y>
+     <y>90</y>
      <width>116</width>
      <height>34</height>
     </rect>
@@ -30,7 +30,7 @@
    <property name="geometry">
     <rect>
      <x>120</x>
-     <y>200</y>
+     <y>160</y>
      <width>116</width>
      <height>34</height>
     </rect>
@@ -42,23 +42,40 @@
   <widget class="QLabel" name="messageLabel">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>480</y>
-     <width>621</width>
-     <height>151</height>
+     <x>20</x>
+     <y>240</y>
+     <width>751</width>
+     <height>441</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Consolas</family>
+     <pointsize>12</pointsize>
+     <weight>50</weight>
+     <italic>true</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::Panel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Sunken</enum>
+   </property>
    <property name="text">
-    <string>message is:</string>
+    <string>write host address
+and the port number
+then press connect button</string>
    </property>
   </widget>
   <widget class="QPushButton" name="connectButton">
    <property name="geometry">
     <rect>
-     <x>660</x>
-     <y>280</y>
-     <width>187</width>
-     <height>57</height>
+     <x>800</x>
+     <y>60</y>
+     <width>191</width>
+     <height>61</height>
     </rect>
    </property>
    <property name="text">
@@ -69,7 +86,7 @@
    <property name="geometry">
     <rect>
      <x>240</x>
-     <y>110</y>
+     <y>70</y>
      <width>491</width>
      <height>51</height>
     </rect>
@@ -82,7 +99,7 @@
    <property name="geometry">
     <rect>
      <x>240</x>
-     <y>200</y>
+     <y>160</y>
      <width>491</width>
      <height>51</height>
     </rect>
@@ -92,12 +109,15 @@
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
-     <x>670</x>
-     <y>570</y>
-     <width>187</width>
-     <height>57</height>
+     <x>800</x>
+     <y>720</y>
+     <width>201</width>
+     <height>61</height>
     </rect>
    </property>
    <property name="text">
@@ -105,23 +125,26 @@
    </property>
   </widget>
   <widget class="QLineEdit" name="sendLineEdit">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>240</x>
-     <y>400</y>
+     <y>710</y>
      <width>471</width>
      <height>51</height>
     </rect>
    </property>
    <property name="text">
-    <string>hi</string>
+    <string/>
    </property>
   </widget>
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
      <x>120</x>
-     <y>410</y>
+     <y>720</y>
      <width>116</width>
      <height>34</height>
     </rect>
@@ -154,6 +177,118 @@
    </property>
    <property name="text">
     <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="regist_pushButton">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>796</x>
+     <y>240</y>
+     <width>201</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>regist</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="see_all_bid_pushButton">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>796</x>
+     <y>310</y>
+     <width>201</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>see all bid</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="submit_pushButton">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>796</x>
+     <y>380</y>
+     <width>201</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>submit an item</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="bid_pushButton">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>800</x>
+     <y>450</y>
+     <width>201</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>bid an item</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="see_all_your_bid_pushButton">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>800</x>
+     <y>520</y>
+     <width>201</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>see all your bid</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="deregist_pushButton">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>800</x>
+     <y>590</y>
+     <width>201</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>deregist</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="withdraw_pushButton">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>800</x>
+     <y>650</y>
+     <width>201</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>withdraw item</string>
    </property>
   </widget>
  </widget>
