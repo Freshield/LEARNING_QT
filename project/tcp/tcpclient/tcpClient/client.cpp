@@ -60,7 +60,25 @@ void Client::readMessage()
     {
         int place = message.indexOf("<uidnum>");
         QString getter = message.mid(place+8,message.size()-place-8);
+        uidnum = getter;
         ui->uidnum_label->setText(getter);
+    }
+    else if(message == tr("SERVER SEND:YOUR REGISTED SUCCESS"))
+    {
+        name = ui->sendLineEdit->text();
+        ui->sendLineEdit->setText("");
+        ui->sendLineEdit->setEnabled(false);
+        ui->regist_pushButton->setEnabled(false);
+        ui->bid_pushButton->setEnabled(true);
+        ui->see_all_bid_pushButton->setEnabled(true);
+        ui->see_all_your_bid_pushButton->setEnabled(true);
+        ui->submit_pushButton->setEnabled(true);
+        ui->deregist_pushButton->setEnabled(true);
+        ui->withdraw_pushButton->setEnabled(true);
+        ui->namelabel->setText(name);
+
+        ui->messageLabel->setText(message+tr("\n")+tr("Now you can try to play the game"));
+
     }
     else
     {
@@ -92,15 +110,8 @@ void Client::on_connectButton_clicked()
 
 void Client::on_pushButton_clicked()
 {
-    QByteArray block;
-    QDataStream out(&block,QIODevice::WriteOnly);
 
-    out.setVersion(QDataStream::Qt_4_0);
-    out<<(quint16)0;
-    out<<ui->sendLineEdit->text();
-    out.device()->seek(0);
-    out<<(quint16)(block.size() - sizeof(quint16));
-
+    QByteArray block = pickup_data(ui->sendLineEdit->text());
     tcpSocket->write(block);
 }
 
@@ -115,3 +126,43 @@ void Client::ifconnected()
     ui->messageLabel->setText(tr("Connect success,\nthen entre your name \nand press regist to regist first"));
     return;
 }
+
+QString Client::format_message(QString header, QString data)
+{
+
+    QString message ="CLIENT UID "+uidnum+" send: "+"<uidnum>"+uidnum+"</uidnu>"+"<header>"+header+"</heade>"+"<messag>"+data+"</messa>";
+    return message;
+}
+
+void Client::on_regist_pushButton_clicked()
+{
+    if(ui->sendLineEdit->text() == tr(""))
+    {
+        QMessageBox::warning(this,tr("Regist"),tr("Name can not be empty"));
+        return;
+    }
+    else
+    {
+        QString message = format_message("0",ui->sendLineEdit->text());
+        QByteArray block = pickup_data(message);
+        tcpSocket->write(block);
+    }
+
+
+}
+
+
+QByteArray Client::pickup_data(QString data)
+{
+    QByteArray block;
+    QDataStream out(&block,QIODevice::WriteOnly);
+
+    out.setVersion(QDataStream::Qt_4_0);
+    out<<(quint16)0;
+    out<<data;//here is the true string data
+    out.device()->seek(0);
+    out<<(quint16)(block.size() - sizeof(quint16));
+
+    return block;
+}
+

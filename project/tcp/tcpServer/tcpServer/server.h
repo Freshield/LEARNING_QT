@@ -18,6 +18,7 @@ struct UID
     QString number;
     QTcpSocket *sockets_value;
     QString registed;
+    QString strIPandPort;
 
 };
 
@@ -49,6 +50,7 @@ private:
 
     QByteArray pickup_data(QString data);
     void send_to_client(QTcpSocket *socket, QString data);
+
 
 
 

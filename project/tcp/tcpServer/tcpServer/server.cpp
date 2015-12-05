@@ -50,15 +50,8 @@ void Server::on_pushButton_clicked()
 
     m_ClientList[m_Index]->SendBytes(block);
 }
-//read slot
-void Server::readMessage(QString strIPandPort,QString data)
-{
 
 
-    ui->label->setText(strIPandPort+":"+data);
-
-
-}
 //set port number slot
 void Server::on_setButton_clicked()
 {
@@ -108,6 +101,7 @@ void Server::onNewConnection()
     UID_NUM++;
     newuid.registed = "no";
     newuid.sockets_value = socknewer;
+    newuid.strIPandPort = strIPandPort;
 
     uidlist.append(newuid);
     //show in list
@@ -136,6 +130,7 @@ void Server::DeleteOneClient(QString strIPandPort)
     ui->listWidget->takeItem(m_Index);
     m_IPandPortList.removeAt(m_Index);
     m_ClientList.removeAt(m_Index);
+    uidlist.removeAt(m_Index);
 }
 
 void Server::on_send_all_pushButton_clicked()
@@ -181,3 +176,77 @@ void Server::send_to_client(QTcpSocket *socket, QString data)
     socket->write(block);
 
 }
+
+
+//read slot
+void Server::readMessage(QString strIPandPort,QString data)
+{
+
+    QString temp = ui->label->text() + "\n";
+    QString uidtemp;
+    int listnum;
+
+    for(listnum = 0;listnum<uidlist.size();listnum++)
+    {
+        if(strIPandPort == uidlist[listnum].strIPandPort)
+        {
+            uidtemp = uidlist[listnum].number;
+            break;
+        }
+
+    }
+    //safe begin
+    if(data[0] == 'C' && data[1] == 'L')
+    {
+
+        //--------------------------------------------------------------//
+        //----------------FIGURE OUT THE MESSAGE------------------------//
+        //--------------------------------------------------------------//
+        //split the message
+        QString message_uid;
+        QString message_header;
+        QString message_data;
+        message_uid = data.mid(data.indexOf("<uidnum>")+8,data.indexOf("</uidnu>")-data.indexOf("<uidnum>")-8);
+        message_header = data.mid(data.indexOf("<header>")+8,data.indexOf("</heade>")-data.indexOf("<header>")-8);
+        message_data = data.mid(data.indexOf("<messag>")+8,data.indexOf("</messa>")-data.indexOf("<messag>")-8);
+        //figure out the header
+        //regist
+        if(message_header == "0")
+        {
+            int listnum2;
+            //get the list place
+            for(listnum2 = 0;listnum2<uidlist.size();listnum2++)
+            {
+                if(message_uid == uidlist[listnum2].number)
+                {
+                    uidlist[listnum2].name = message_data;
+                    uidlist[listnum2].registed = "yes";
+                    QString listtemp = ui->listWidget->item(listnum2)->text();
+                    ui->listWidget->item(listnum2)->setText(listtemp+tr(" name:")+message_data);
+                    QByteArray block = pickup_data(tr("SERVER SEND:YOUR REGISTED SUCCESS"));
+                    m_ClientList[listnum2]->SendBytes(block);
+                    ui->label->setText(temp + tr("UID")+message_uid+tr(" regist success\nthe name is ")+message_data);
+                    break;
+                }
+
+            }
+
+        }
+        else
+        {
+            ui->label->setText(temp + data);
+
+        }
+
+
+    }
+    else
+    {
+
+        ui->label->setText(temp + data);
+
+    }
+
+
+}
+

@@ -64,9 +64,15 @@
     <enum>QFrame::Sunken</enum>
    </property>
    <property name="text">
-    <string>write host address
+    <string>Welcome to the bid system
+
+write host address
 and the port number
-then press connect button</string>
+then press connect button
+to connect to the server</string>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
    </property>
   </widget>
   <widget class="QPushButton" name="connectButton">
@@ -289,6 +295,32 @@ then press connect button</string>
    </property>
    <property name="text">
     <string>withdraw item</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>50</y>
+     <width>116</width>
+     <height>34</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>name:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="namelabel">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>50</y>
+     <width>116</width>
+     <height>34</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>

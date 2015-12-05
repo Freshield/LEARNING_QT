@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>857</width>
-    <height>685</height>
+    <width>1231</width>
+    <height>864</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,14 +16,24 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>60</x>
-     <y>440</y>
-     <width>341</width>
-     <height>191</height>
+     <x>10</x>
+     <y>410</y>
+     <width>1191</width>
+     <height>431</height>
     </rect>
    </property>
+   <property name="frameShape">
+    <enum>QFrame::Panel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Sunken</enum>
+   </property>
    <property name="text">
-    <string>WAITING!!!</string>
+    <string>WAITING!!!
+</string>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
    </property>
   </widget>
   <widget class="QLineEdit" name="lineEdit">
@@ -32,8 +42,8 @@
    </property>
    <property name="geometry">
     <rect>
-     <x>400</x>
-     <y>440</y>
+     <x>780</x>
+     <y>180</y>
      <width>421</width>
      <height>71</height>
     </rect>
@@ -48,8 +58,8 @@
    </property>
    <property name="geometry">
     <rect>
-     <x>400</x>
-     <y>560</y>
+     <x>780</x>
+     <y>300</y>
      <width>187</width>
      <height>57</height>
     </rect>
@@ -106,6 +116,12 @@
      <height>251</height>
     </rect>
    </property>
+   <property name="isWrapping" stdset="0">
+    <bool>false</bool>
+   </property>
+   <property name="wordWrap">
+    <bool>false</bool>
+   </property>
   </widget>
   <widget class="QPushButton" name="send_all_pushButton">
    <property name="enabled">
@@ -113,8 +129,8 @@
    </property>
    <property name="geometry">
     <rect>
-     <x>640</x>
-     <y>560</y>
+     <x>1020</x>
+     <y>300</y>
      <width>187</width>
      <height>57</height>
     </rect>

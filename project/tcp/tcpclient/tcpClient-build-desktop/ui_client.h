@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'client.ui'
 **
-** Created: Sat Dec 5 15:18:00 2015
+** Created: Sat Dec 5 16:55:08 2015
 **      by: Qt User Interface Compiler version 4.7.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -43,6 +43,8 @@ public:
     QPushButton *see_all_your_bid_pushButton;
     QPushButton *deregist_pushButton;
     QPushButton *withdraw_pushButton;
+    QLabel *label_5;
+    QLabel *namelabel;
 
     void setupUi(QDialog *Client)
     {
@@ -67,6 +69,7 @@ public:
         messageLabel->setFont(font);
         messageLabel->setFrameShape(QFrame::Panel);
         messageLabel->setFrameShadow(QFrame::Sunken);
+        messageLabel->setWordWrap(true);
         connectButton = new QPushButton(Client);
         connectButton->setObjectName(QString::fromUtf8("connectButton"));
         connectButton->setGeometry(QRect(800, 60, 191, 61));
@@ -121,6 +124,12 @@ public:
         withdraw_pushButton->setObjectName(QString::fromUtf8("withdraw_pushButton"));
         withdraw_pushButton->setEnabled(false);
         withdraw_pushButton->setGeometry(QRect(800, 650, 201, 61));
+        label_5 = new QLabel(Client);
+        label_5->setObjectName(QString::fromUtf8("label_5"));
+        label_5->setGeometry(QRect(10, 50, 116, 34));
+        namelabel = new QLabel(Client);
+        namelabel->setObjectName(QString::fromUtf8("namelabel"));
+        namelabel->setGeometry(QRect(100, 50, 116, 34));
 
         retranslateUi(Client);
 
@@ -132,9 +141,12 @@ public:
         Client->setWindowTitle(QApplication::translate("Client", "Client", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("Client", "host:", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("Client", "port:", 0, QApplication::UnicodeUTF8));
-        messageLabel->setText(QApplication::translate("Client", "write host address\n"
+        messageLabel->setText(QApplication::translate("Client", "Welcome to the bid system\n"
+"\n"
+"write host address\n"
 "and the port number\n"
-"then press connect button", 0, QApplication::UnicodeUTF8));
+"then press connect button\n"
+"to connect to the server", 0, QApplication::UnicodeUTF8));
         connectButton->setText(QApplication::translate("Client", "connect", 0, QApplication::UnicodeUTF8));
         hostLineEdit->setText(QApplication::translate("Client", "127.0.0.1", 0, QApplication::UnicodeUTF8));
         portLineEdit->setText(QApplication::translate("Client", "2333", 0, QApplication::UnicodeUTF8));
@@ -150,6 +162,8 @@ public:
         see_all_your_bid_pushButton->setText(QApplication::translate("Client", "see all your bid", 0, QApplication::UnicodeUTF8));
         deregist_pushButton->setText(QApplication::translate("Client", "deregist", 0, QApplication::UnicodeUTF8));
         withdraw_pushButton->setText(QApplication::translate("Client", "withdraw item", 0, QApplication::UnicodeUTF8));
+        label_5->setText(QApplication::translate("Client", "name:", 0, QApplication::UnicodeUTF8));
+        namelabel->setText(QString());
     } // retranslateUi
 
 };

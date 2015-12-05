@@ -27,6 +27,9 @@ private:
     QString message;
     quint16 blockSize;
     QString uidnum;
+    QString name;
+    QString format_message(QString header,QString data);
+    QByteArray pickup_data(QString data);
 
 private slots:
     void newConnect();
@@ -35,6 +38,7 @@ private slots:
     void on_connectButton_clicked();
     void on_pushButton_clicked();
     void ifconnected();
+    void on_regist_pushButton_clicked();
 };
 
 #endif // CLIENT_H
