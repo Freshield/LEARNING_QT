@@ -2,9 +2,12 @@
 #define SERVER_H
 
 #include <QDialog>
-#include <QAbstractSocket>
+//#include <QAbstractSocket>
 #include <QTcpServer>
 #include <QList>
+#include <QtNetwork>
+#include <QStringList>
+#include "clientjobs.h"
 
 class QTcpServer;
 
@@ -23,19 +26,22 @@ public:
 private:
     Ui::Server *ui;
 
-    QTcpSocket *test;
-    quint16 blockSize;
-    QString message;
-    QTcpServer tcpServer;
-    QList<QTcpSocket> *Socketbar;
+    //quint16 blockSize;
+    //QString message;
+    QTcpServer *m_server;
+    QList<clientjobs*> m_ClientList;
+    QStringList m_IPandPortList;
 
 
 
 private slots:
     void on_pushButton_clicked();
-    void readMessage();
-    void acceptedConnection();
-    void displayError(QAbstractSocket::SocketError);
+    void readMessage(QString strIPandPort,QString data);
+
+    void onNewConnection();
+    void DeleteOneClient(QString strIPandPort);
+
+    void on_setButton_clicked();
 };
 
 #endif // SERVER_H

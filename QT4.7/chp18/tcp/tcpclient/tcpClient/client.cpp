@@ -2,6 +2,7 @@
 #include "ui_client.h"
 
 #include <QtNetwork>
+#include <QMessageBox>
 
 Client::Client(QWidget *parent) :
     QDialog(parent),
@@ -12,6 +13,7 @@ Client::Client(QWidget *parent) :
     connect(tcpSocket,SIGNAL(readyRead()),this,SLOT(readMessage()));
     connect(tcpSocket,SIGNAL(error(QAbstractSocket::SocketError)),this,SLOT(displayError(QAbstractSocket::SocketError)));
 
+    connect(tcpSocket,SIGNAL(connected()),this,SLOT(ifconnected()));
 }
 
 Client::~Client()
@@ -25,6 +27,7 @@ void Client::newConnect()
 
     tcpSocket->abort();
     tcpSocket->connectToHost(ui->hostLineEdit->text(),ui->portLineEdit->text().toInt());
+
 }
 
 void Client::readMessage()
@@ -85,4 +88,10 @@ void Client::on_pushButton_clicked()
     out<<(quint16)(block.size() - sizeof(quint16));
 
     tcpSocket->write(block);
+}
+
+void Client::ifconnected()
+{
+    QMessageBox::information(this,tr("Connected"),tr("Connected successed"));
+    return;
 }

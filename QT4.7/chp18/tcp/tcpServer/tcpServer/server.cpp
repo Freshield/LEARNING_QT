@@ -1,6 +1,12 @@
 #include "server.h"
 #include "ui_server.h"
 #include <QtNetwork>
+#include <QMessageBox>
+#include <QHostAddress>
+#include <QByteArray>
+#include <QDebug>
+#include "clientjobs.h"
+
 
 Server::Server(QWidget *parent) :
     QDialog(parent),
@@ -8,24 +14,23 @@ Server::Server(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    m_server = new QTcpServer(this);
+    //connect signal and slots
+    connect(m_server,SIGNAL(newConnection()),this,SLOT(onNewConnection()));
 
-    if(! tcpServer.listen(QHostAddress::LocalHost,2333))
-    {
-        qDebug() << "1";
-        qDebug()<<tcpServer.errorString();
-        close();
-    }
-    connect(&tcpServer,SIGNAL(newConnection()),this,SLOT(acceptedConnection()));
+
 }
 
 Server::~Server()
 {
+    delete m_server;
+    m_server = NULL;
     delete ui;
 }
-
+/*
 void Server::acceptedConnection()
 {
-    /*
+
     QByteArray block;
     QDataStream out(&block,QIODevice::WriteOnly);
 
@@ -34,7 +39,7 @@ void Server::acceptedConnection()
     out<<tr("hello TCP!!!");
     out.device()->seek(0);
     out<<(quint16)(block.size() - sizeof(quint16));
-*/
+
     blockSize = 0;
 
     test = tcpServer.nextPendingConnection();
@@ -50,9 +55,21 @@ void Server::acceptedConnection()
     ui->label->setText("connected");
 
 }
-
+*/
 void Server::on_pushButton_clicked()
 {
+    //find if there have client
+    if(m_ClientList.count()<1)
+    {
+        return;
+    }
+    //figure out which client
+    int m_Index = ui->listWidget->currentRow();
+    if(m_Index<0)
+    {
+        return;
+    }
+
     QByteArray block;
     QDataStream out(&block,QIODevice::WriteOnly);
 
@@ -62,39 +79,68 @@ void Server::on_pushButton_clicked()
     out.device()->seek(0);
     out<<(quint16)(block.size() - sizeof(quint16));
 
-    test->write(block);
+    m_ClientList[m_Index]->SendBytes(block);
 }
 
-
-void Server::displayError(QAbstractSocket::SocketError)
+void Server::readMessage(QString strIPandPort,QString data)
 {
-    qDebug() << test->errorString();
+
+
+    ui->label->setText(strIPandPort+data);
+
+
 }
-
-void Server::readMessage()
+void Server::on_setButton_clicked()
 {
-    QDataStream in(test);
-    in.setVersion(QDataStream::Qt_4_0);
-
-    if(blockSize == 0)
-    {
-        if(test->bytesAvailable() < (int)sizeof(quint16))
-        {
-            return;
-        }
-        in >> blockSize;
-    }
-
-    if(test->bytesAvailable() < blockSize)
+    //if it is listening
+    if(m_server->isListening())
     {
         return;
     }
+    int portnum = ui->PortLineEdit->text().toInt();
+    bool listenreturn = m_server->listen(QHostAddress::Any, portnum);
+    //find if listen is successing
+    if(listenreturn)
+    {
+        QMessageBox::information(this,tr("Listen"),tr("Listen successed"));
+        return;
+    }
+    else
+    {
+        QMessageBox::warning(this,tr("Listen"),tr("Listen failed"));
+        return;
+    }
 
-    in >> message;
+}
 
-    ui->label->setText(message);
+void Server::onNewConnection()
+{
+    //find new connection socket
+    QTcpSocket *socknewer = m_server->nextPendingConnection();
+    //get IP PORT
+    QString strIPandPort = socknewer->peerAddress().toString()+tr("_%1").arg(socknewer->peerPort());
+    m_IPandPortList.append(strIPandPort);
+    //show in list
+    ui->listWidget->addItem(strIPandPort);
+    //begin constract new client
+    clientjobs *newClientJobs = new clientjobs(this,socknewer,strIPandPort);
+    //push in client list
+    m_ClientList.append(newClientJobs);
 
-    blockSize = 0;
+    connect(newClientJobs,SIGNAL(CallMainWindowDeleteClient(QString)),this,SLOT(DeleteOneClient(QString)));
 
+    connect(newClientJobs,SIGNAL(CallMainWindowReadData(QString,QString)),this,SLOT(readMessage(QString,QString)));
 
+}
+
+void Server::DeleteOneClient(QString strIPandPort)
+{
+    int m_Index = m_IPandPortList.indexOf(strIPandPort);
+    if(m_Index<0)
+    {
+        return;
+    }
+    ui->listWidget->takeItem(m_Index);
+    m_IPandPortList.removeAt(m_Index);
+    m_ClientList.removeAt(m_Index);
 }

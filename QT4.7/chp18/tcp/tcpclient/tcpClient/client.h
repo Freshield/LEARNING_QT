@@ -33,6 +33,7 @@ private slots:
     void displayError(QAbstractSocket::SocketError);
     void on_connectButton_clicked();
     void on_pushButton_clicked();
+    void ifconnected();
 };
 
 #endif // CLIENT_H

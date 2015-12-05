@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'client.h'
 **
-** Created: Fri Dec 4 16:18:51 2015
+** Created: Fri Dec 4 22:30:48 2015
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.2)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_Client[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       6,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -36,6 +36,7 @@ static const uint qt_meta_data_Client[] = {
       35,    7,    7,    7, 0x08,
       78,    7,    7,    7, 0x08,
      105,    7,    7,    7, 0x08,
+     129,    7,    7,    7, 0x08,
 
        0        // eod
 };
@@ -44,7 +45,7 @@ static const char qt_meta_stringdata_Client[] = {
     "Client\0\0newConnect()\0readMessage()\0"
     "displayError(QAbstractSocket::SocketError)\0"
     "on_connectButton_clicked()\0"
-    "on_pushButton_clicked()\0"
+    "on_pushButton_clicked()\0ifconnected()\0"
 };
 
 const QMetaObject Client::staticMetaObject = {
@@ -81,9 +82,10 @@ int Client::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 2: displayError((*reinterpret_cast< QAbstractSocket::SocketError(*)>(_a[1]))); break;
         case 3: on_connectButton_clicked(); break;
         case 4: on_pushButton_clicked(); break;
+        case 5: ifconnected(); break;
         default: ;
         }
-        _id -= 5;
+        _id -= 6;
     }
     return _id;
 }
