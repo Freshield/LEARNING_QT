@@ -25,23 +25,24 @@ public:
 
 private:
     Ui::Server *ui;
+    //server private member
 
-    //quint16 blockSize;
-    //QString message;
-    QTcpServer *m_server;
-    QList<clientjobs*> m_ClientList;
-    QStringList m_IPandPortList;
+    QTcpServer *m_server;//the server itself
+    QList<clientjobs*> m_ClientList;//client class to save socket
+    QStringList m_IPandPortList;//IPPort list
 
 
 
 private slots:
-    void on_pushButton_clicked();
-    void readMessage(QString strIPandPort,QString data);
+    //response the slot
+    void on_pushButton_clicked();//send the message
+    void readMessage(QString strIPandPort,QString data);//read slot
 
-    void onNewConnection();
-    void DeleteOneClient(QString strIPandPort);
+    void onNewConnection();//new connect
+    void DeleteOneClient(QString strIPandPort);//delete client
 
-    void on_setButton_clicked();
+    void on_setButton_clicked();//set the port num
+    void on_send_all_pushButton_clicked();
 };
 
 #endif // SERVER_H

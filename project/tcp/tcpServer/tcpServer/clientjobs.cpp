@@ -9,22 +9,23 @@ clientjobs::clientjobs(QObject *parent, QTcpSocket *client, QString strIPPort) :
     blockSize = 0;
 
     //connect signal and slots
-    connect(m_ClientSock,SIGNAL(disconnected()),this,SLOT(LostConnection()));
-    connect(m_ClientSock,SIGNAL(readyRead()),this,SLOT(ReadBytes()));
+    connect(m_ClientSock,SIGNAL(disconnected()),this,SLOT(LostConnection()));//disconnected emit lost
+    connect(m_ClientSock,SIGNAL(readyRead()),this,SLOT(ReadBytes()));//readyread emit read
 }
-
+//send slot
 void clientjobs::SendBytes(QByteArray &data)
 {
     m_ClientSock->write(data);
 }
-
+//lost slot
 void clientjobs::LostConnection()
 {
     emit CallMainWindowDeleteClient(m_strIPPort);
 }
-
+//read slot
 void clientjobs::ReadBytes()
 {
+    //transfer block
     QDataStream in(m_ClientSock);
     in.setVersion(QDataStream::Qt_4_0);
 
@@ -43,6 +44,7 @@ void clientjobs::ReadBytes()
     }
 
     in >> message;
+    //directly send IPPort and message
 
     emit CallMainWindowReadData(m_strIPPort,message);
 

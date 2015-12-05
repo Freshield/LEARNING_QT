@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'server.h'
 **
-** Created: Fri Dec 4 22:30:54 2015
+** Created: Sat Dec 5 13:27:19 2015
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.2)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_Server[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       6,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -36,6 +36,7 @@ static const uint qt_meta_data_Server[] = {
       79,    7,    7,    7, 0x08,
      110,   97,    7,    7, 0x08,
      135,    7,    7,    7, 0x08,
+     158,    7,    7,    7, 0x08,
 
        0        // eod
 };
@@ -46,6 +47,7 @@ static const char qt_meta_stringdata_Server[] = {
     "onNewConnection()\0strIPandPort\0"
     "DeleteOneClient(QString)\0"
     "on_setButton_clicked()\0"
+    "on_send_all_pushButton_clicked()\0"
 };
 
 const QMetaObject Server::staticMetaObject = {
@@ -82,9 +84,10 @@ int Server::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 2: onNewConnection(); break;
         case 3: DeleteOneClient((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 4: on_setButton_clicked(); break;
+        case 5: on_send_all_pushButton_clicked(); break;
         default: ;
         }
-        _id -= 5;
+        _id -= 6;
     }
     return _id;
 }

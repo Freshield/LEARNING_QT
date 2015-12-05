@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'server.ui'
 **
-** Created: Fri Dec 4 21:18:17 2015
+** Created: Sat Dec 5 13:27:15 2015
 **      by: Qt User Interface Compiler version 4.7.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -33,6 +33,7 @@ public:
     QLineEdit *PortLineEdit;
     QPushButton *setButton;
     QListWidget *listWidget;
+    QPushButton *send_all_pushButton;
 
     void setupUi(QDialog *Server)
     {
@@ -47,7 +48,7 @@ public:
         lineEdit->setGeometry(QRect(400, 440, 421, 71));
         pushButton = new QPushButton(Server);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        pushButton->setGeometry(QRect(610, 570, 187, 57));
+        pushButton->setGeometry(QRect(400, 560, 187, 57));
         label_3 = new QLabel(Server);
         label_3->setObjectName(QString::fromUtf8("label_3"));
         label_3->setGeometry(QRect(60, 60, 116, 34));
@@ -60,6 +61,9 @@ public:
         listWidget = new QListWidget(Server);
         listWidget->setObjectName(QString::fromUtf8("listWidget"));
         listWidget->setGeometry(QRect(90, 150, 671, 251));
+        send_all_pushButton = new QPushButton(Server);
+        send_all_pushButton->setObjectName(QString::fromUtf8("send_all_pushButton"));
+        send_all_pushButton->setGeometry(QRect(640, 560, 187, 57));
 
         retranslateUi(Server);
 
@@ -75,6 +79,7 @@ public:
         label_3->setText(QApplication::translate("Server", "port:", 0, QApplication::UnicodeUTF8));
         PortLineEdit->setText(QApplication::translate("Server", "2333", 0, QApplication::UnicodeUTF8));
         setButton->setText(QApplication::translate("Server", "set", 0, QApplication::UnicodeUTF8));
+        send_all_pushButton->setText(QApplication::translate("Server", "send all", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

@@ -42,8 +42,8 @@
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>610</x>
-     <y>570</y>
+     <x>400</x>
+     <y>560</y>
      <width>187</width>
      <height>57</height>
     </rect>
@@ -99,6 +99,19 @@
      <width>671</width>
      <height>251</height>
     </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="send_all_pushButton">
+   <property name="geometry">
+    <rect>
+     <x>640</x>
+     <y>560</y>
+     <width>187</width>
+     <height>57</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>send all</string>
    </property>
   </widget>
  </widget>

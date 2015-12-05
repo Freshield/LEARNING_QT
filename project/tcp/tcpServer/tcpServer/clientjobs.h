@@ -13,19 +13,19 @@ public:
 
     //TCP LINK
     QTcpSocket *m_ClientSock;//socket
-    QString m_strIPPort;
+    QString m_strIPPort;//port
 
-    quint16 blockSize;
-    QString message;
+    quint16 blockSize;//send block
+    QString message;//got message
 
 signals:
-    void CallMainWindowDeleteClient(QString m_strIPPort);
-    void CallMainWindowReadData(QString strIPPort,QString data);
+    void CallMainWindowDeleteClient(QString m_strIPPort);//to delete
+    void CallMainWindowReadData(QString strIPPort,QString data);//to read
 
 public slots:
-    void SendBytes(QByteArray &data);
-    void LostConnection();
-    void ReadBytes();
+    void SendBytes(QByteArray &data);//emit send slot
+    void LostConnection();//emit delete slot
+    void ReadBytes();//read message
 
 };
 
