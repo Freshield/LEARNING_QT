@@ -439,19 +439,11 @@ void Server::readMessage(QString strIPandPort,QString data)
                                 m_ClientList[listnum2]->SendBytes(block);
                                 ui->label->setText(tr("CLIENT UID")+message_uid+tr("BID SUCCESS")+temp);
                             }
-
-
                         }
-
-
-
                     }
-
                     break;
                 }
-
             }
-
         }
         //see all the client's bid
         else if(message_header == "4")
@@ -552,7 +544,7 @@ void Server::readMessage(QString strIPandPort,QString data)
                         {
                             QByteArray block = pickup_data(tr("SERVER SEND:THERE HAVE NO ITEMS NOW"));
                             m_ClientList[listnum2]->SendBytes(block);
-                            ui->label->setText(tr("CLIENT UID")+message_uid+tr("WANT A BID BUT NO ITEMS")+temp);
+                            ui->label->setText(tr("CLIENT UID")+message_uid+tr("WANT SEE ITEM BELONG TO ITSELF BUT NO ITEMS")+temp);
                         }
                         //send all items information
                         else
@@ -601,9 +593,148 @@ void Server::readMessage(QString strIPandPort,QString data)
             }
 
         }
+        //withdraw an item
+        else if(message_header == "7")
+        {
+            int listnum2;
+            //get the list place
+            for(listnum2 = 0;listnum2<uidlist.size();listnum2++)
+            {
+                //find the uid
+                if(message_uid == uidlist[listnum2].number)
+                {
+                    //figure out if it is registed
+                    if(uidlist[listnum2].registed == "no")
+                    {
+                        QByteArray block = pickup_data(tr("SERVER SEND:YOU ARE NOT REGISTED"));
+                        m_ClientList[listnum2]->SendBytes(block);
+                    }
+                    //registed then see items
+                    else
+                    {
+                    //TO DO
+                        //if not have items
+                        if(itemlist.size() < 1)
+                        {
+                            QByteArray block = pickup_data(tr("SERVER SEND:THERE HAVE NO ITEMS NOW"));
+                            m_ClientList[listnum2]->SendBytes(block);
+                            ui->label->setText(tr("CLIENT UID")+message_uid+tr("WANT WITHDRAW AN ITEM BUT NO ITEMS")+temp);
+                        }
+                        //send all items information
+                        else
+                        {
+                            //figure out if there have client's item
+                            int ifhaveclientbid = 0;
+                            QString iteminfotemp = tr("SERVER SEND:ALL YOUR ITEM IS BELOW\n");
+
+                            for(int i = 0;i < itemlist.size();i++)
+                            {
+                                if(itemlist[i]->m_owner == message_uid)
+                                {
+                                    QString tempITEM = iteminfotemp+tr("\n<ITN")+QString::number(ifhaveclientbid)+tr(">");
+                                    iteminfotemp = tempITEM+tr("NAME:")+itemlist[i]->m_name+tr(" PRICE:")+itemlist[i]->m_price+tr(" BUYER:")+itemlist[i]->m_buyer+tr(" OWNER:")+itemlist[i]->m_owner+tr(" ITEMCODE:")+itemlist[i]->m_itemcode+tr("</IT")+QString::number(ifhaveclientbid)+tr(">");
+
+                                    ifhaveclientbid ++;
+                                }
+
+                            }
+                            //see if have client bid
+                            if(ifhaveclientbid == 0)
+                            {
+                                QByteArray block = pickup_data(tr("SERVER SEND:THERE HAVE NO YOUR ITEM NOW"));
+                                m_ClientList[listnum2]->SendBytes(block);
+                                ui->label->setText(tr("CLIENT UID")+message_uid+tr("WANT WITHDRAW ITS ITEM BUT DO NOT HAVE")+temp);
+                            }
+                            //if have
+                            else
+                            {
+                                iteminfotemp = iteminfotemp + tr("<ITSZ>")+QString::number(ifhaveclientbid)+tr("</ITS>");
+                                QByteArray block = pickup_data(iteminfotemp);
+                                m_ClientList[listnum2]->SendBytes(block);
+                                ui->label->setText(tr("CLIENT UID")+message_uid+tr("ASK ALL ITS ITEM")+temp);
+                            }
+
+
+                        }
+
+
+
+                    }
+
+                    break;
+                }
+
+            }
+
+        }
+        //get the withdraw item
+        else if(message_header == "71")
+        {
+            int listnum2;
+            //get the list place
+            for(listnum2 = 0;listnum2<uidlist.size();listnum2++)
+            {
+                //find the uid
+                if(message_uid == uidlist[listnum2].number)
+                {
+                    //figure out if it is registed
+                    if(uidlist[listnum2].registed == "no")
+                    {
+                        QByteArray block = pickup_data(tr("SERVER SEND:YOU ARE NOT REGISTED"));
+                        m_ClientList[listnum2]->SendBytes(block);
+                    }
+                    //registed then see items
+                    else
+                    {
+                    //TO DO
+                        //if not have items
+                        if(itemlist.size() < 1)
+                        {
+                            QByteArray block = pickup_data(tr("SERVER SEND:THERE HAVE NO ITEMS NOW"));
+                            m_ClientList[listnum2]->SendBytes(block);
+                            ui->label->setText(tr("CLIENT UID")+message_uid+tr("WANT WITHDRAW BUT NO ITEMS")+temp);
+                        }
+                        //send all items information
+                        else
+                        {
+                        //TO DO
+                            QString biditemcode = message_data;
+                            int ifgetitem = 0;
+                            for(int i = 0;i < itemlist.size();i++)
+                            {
+                               if(itemlist[i]->m_itemcode == biditemcode)
+                               {
+                                   ifgetitem = 1;
+
+                                   ui->ItemlistWidget->takeItem(i);
+                                   itemlist.removeAt(i);
+
+
+                                   break;
+                               }
+                            }
+                            //see if success get the item
+                            if(ifgetitem == 0)
+                            {
+                                QByteArray block = pickup_data(tr("SERVER SEND:YOUR WITHDRAW FAILED\nCAUSE NOT FIND THE ITEM"));
+                                m_ClientList[listnum2]->SendBytes(block);
+                                ui->label->setText(tr("CLIENT UID")+message_uid+tr("WITHDRAW FAILED\nCAUSE NOT FIND THE ITEM")+temp);
+                            }
+                            else
+                            {
+                                QByteArray block = pickup_data(tr("SERVER SEND:YOUR WITHDRAW SUCCESS"));
+                                m_ClientList[listnum2]->SendBytes(block);
+                                ui->label->setText(tr("CLIENT UID")+message_uid+tr("WITHDRAW SUCCESS")+temp);
+                            }
+                        }
+                    }
+                    break;
+                }
+            }
+        }
         else
         {
-            ui->label->setText(temp+temp);
+            ui->label->setText(data+temp);
 
         }
 

@@ -6,6 +6,7 @@
 #include "submitdialog.h"
 #include "seeallbiddialog.h"
 #include "biditemdialog.h"
+#include "withdrawitemdialog.h"
 
 Client::Client(QWidget *parent) :
     QDialog(parent),
@@ -114,6 +115,15 @@ void Client::readMessage()
         SeeAllBidDialog *newseeallbid = new SeeAllBidDialog(this,message);
         newseeallbid->show();
         ui->messageLabel->setText("SERVER SEND:ALL ITEM IS BELOW");
+
+    }
+    //withdraw client's item
+    else if(message.contains("SERVER SEND:ALL YOUR ITEM IS BELOW\n"))
+    {
+        WithdrawItemDialog *newwithdrawitem = new WithdrawItemDialog(this,message,uidnum);
+        connect(newwithdrawitem,SIGNAL(biditemsinfo(QString)),this,SLOT(withdrawiteminfo(QString)));
+        newwithdrawitem->show();
+        ui->messageLabel->setText("SERVER SEND:ALL ITEM BELONG TO YOU IS BELOW\n");
 
     }
     else
@@ -251,14 +261,26 @@ void Client::on_see_all_your_bid_pushButton_clicked()
     tcpSocket->write(block);
 }
 
-void Client::on_withdraw_pushButton_clicked()
-{
-
-}
 
 void Client::on_see_all_your_item_pushButton_clicked()
 {
     QString message = format_message("5",tr("I WANT TO SEE ALL MY SALE"));
+    QByteArray block = pickup_data(message);
+    tcpSocket->write(block);
+}
+
+
+void Client::on_withdraw_pushButton_clicked()
+{
+    QString message = format_message("7",tr("I WANT TO WITHDRAW MY ITEM"));
+    QByteArray block = pickup_data(message);
+    tcpSocket->write(block);
+
+}
+
+void Client::withdrawiteminfo(QString itemscode)
+{
+    QString message = format_message("71",itemscode);
     QByteArray block = pickup_data(message);
     tcpSocket->write(block);
 }

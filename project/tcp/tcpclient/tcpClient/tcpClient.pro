@@ -15,18 +15,21 @@ SOURCES += main.cpp\
     submitdialog.cpp \
     seeallbiddialog.cpp \
     biditemdialog.cpp \
-    bidpricedialog.cpp
+    bidpricedialog.cpp \
+    withdrawitemdialog.cpp
 
 HEADERS  += client.h \
     submitdialog.h \
     seeallbiddialog.h \
     biditemdialog.h \
-    bidpricedialog.h
+    bidpricedialog.h \
+    withdrawitemdialog.h
 
 FORMS    += client.ui \
     submitdialog.ui \
     seeallbiddialog.ui \
     biditemdialog.ui \
-    bidpricedialog.ui
+    bidpricedialog.ui \
+    withdrawitemdialog.ui
 
 QT += network

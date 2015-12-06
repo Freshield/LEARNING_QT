@@ -40,6 +40,7 @@ private slots:
     void ifconnected();
     void submititems(QString itemname);
     void getbiditem(QString itemscode,QString itemprice);
+    void withdrawiteminfo(QString itemscode);
 
 
 
@@ -53,6 +54,8 @@ private slots:
     void on_withdraw_pushButton_clicked();
 
     void on_see_all_your_item_pushButton_clicked();
+
+
 
 signals:
     void allbidinfo(QString data);
