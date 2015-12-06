@@ -2,11 +2,12 @@
 #include "ui_bidpricedialog.h"
 #include <QMessageBox>
 
-BidPriceDialog::BidPriceDialog(QWidget *parent) :
+BidPriceDialog::BidPriceDialog(QWidget *parent,QString parentuid) :
     QDialog(parent),
     ui(new Ui::BidPriceDialog)
 {
     ui->setupUi(this);
+    m_parentuid = parentuid;
 }
 
 BidPriceDialog::~BidPriceDialog()

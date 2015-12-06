@@ -94,7 +94,7 @@ void Client::readMessage()
     //want a bid
     else if(message.contains("SERVER SEND:ALL ITEM YOU CAN BID IS BELOW\n"))
     {
-        BidItemDialog *newbiditem = new BidItemDialog(this,message);
+        BidItemDialog *newbiditem = new BidItemDialog(this,message,uidnum);
         connect(newbiditem,SIGNAL(biditemsinfo(QString,QString)),this,SLOT(getbiditem(QString,QString)),Qt::QueuedConnection);
         newbiditem->show();
         ui->messageLabel->setText("SERVER SEND:GET BID ITEM");

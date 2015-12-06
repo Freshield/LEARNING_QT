@@ -12,7 +12,15 @@ SeeAllBidDialog::SeeAllBidDialog(QWidget *parent,QString data) :
     {
         QString tempbegin = tr("<ITN")+QString::number(i)+tr(">");
         QString tempend = tr("</IT")+QString::number(i)+tr(">");
-        QString tempinfo = data.mid(data.indexOf(tempbegin)+6,data.indexOf(tempend)-data.indexOf(tempbegin)-6);
+        QString tempinfo;
+        if(i<=9)
+        {
+        tempinfo = data.mid(data.indexOf(tempbegin)+6,data.indexOf(tempend)-data.indexOf(tempbegin)-6)+";";
+        }
+        else
+        {
+            tempinfo = data.mid(data.indexOf(tempbegin)+7,data.indexOf(tempend)-data.indexOf(tempbegin)-7)+";";
+        }
         ui->listWidget->addItem(tempinfo);
 
     }

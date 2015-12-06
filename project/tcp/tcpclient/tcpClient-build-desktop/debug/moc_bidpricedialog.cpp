@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'bidpricedialog.h'
 **
-** Created: Sat Dec 5 22:33:03 2015
+** Created: Sun Dec 6 13:43:49 2015
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.2)
 **
 ** WARNING! All changes made in this file will be lost!

@@ -5,18 +5,27 @@
 #include <QDebug>
 #include <QMessageBox>
 
-BidItemDialog::BidItemDialog(QWidget *parent,QString data) :
+BidItemDialog::BidItemDialog(QWidget *parent,QString data,QString parentuid) :
     QDialog(parent),
     ui(new Ui::BidItemDialog)
 {
     ui->setupUi(this);
     biditeminfo = data;
+    m_parentuid = parentuid;
         int count = data.mid(data.indexOf("<ITSZ>")+6,data.indexOf("</ITS>")-data.indexOf("<ITSZ>")-6).toInt();
         for(int i = 0;i<count;i++)
         {
             QString tempbegin = tr("<ITN")+QString::number(i)+tr(">");
             QString tempend = tr("</IT")+QString::number(i)+tr(">");
-            QString tempinfo = data.mid(data.indexOf(tempbegin)+6,data.indexOf(tempend)-data.indexOf(tempbegin)-6)+";";
+            QString tempinfo;
+            if(i<=9)
+            {
+            tempinfo = data.mid(data.indexOf(tempbegin)+6,data.indexOf(tempend)-data.indexOf(tempbegin)-6)+";";
+            }
+            else
+            {
+                tempinfo = data.mid(data.indexOf(tempbegin)+7,data.indexOf(tempend)-data.indexOf(tempbegin)-7)+";";
+            }
 
             ui->listWidget->addItem(tempinfo);
 
@@ -54,7 +63,15 @@ void BidItemDialog::on_listWidget_itemDoubleClicked(QListWidgetItem* item)
     m_itemprice = itemtemp.mid(itemtemp.indexOf(tr("PRICE:"))+6,itemtemp.indexOf(tr(" BUYER:"))-itemtemp.indexOf(tr("PRICE:"))-6);
     QString theitemcode = itemtemp.mid(itemtemp.indexOf(tr("ITEMCODE:"))+9,itemtemp.indexOf(";")-itemtemp.indexOf(tr("ITEMCODE:"))-9);
     m_itemscode = theitemcode;
-    BidPriceDialog *newbidprice = new BidPriceDialog(this);
+    //figure out if the owner is the same
+    /*
+    if(theitemowner == m_parentuid)
+    {
+        QMessageBox::warning(this,tr("Owner"),tr("You can not bid item belong yourself"));
+        return;
+    }
+    */
+    BidPriceDialog *newbidprice = new BidPriceDialog(this,m_parentuid);
     connect(newbidprice,SIGNAL(itempriceget(QString)),this,SLOT(itempricegot(QString)),Qt::QueuedConnection);
     newbidprice->show();
 }

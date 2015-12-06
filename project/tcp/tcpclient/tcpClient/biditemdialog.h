@@ -13,7 +13,7 @@ class BidItemDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit BidItemDialog(QWidget *parent,QString data);
+    explicit BidItemDialog(QWidget *parent,QString data,QString parentuid);
     ~BidItemDialog();
 
 private slots:
@@ -26,6 +26,7 @@ private:
     QString biditeminfo;
     QString m_itemscode;
     QString m_itemprice;
+    QString m_parentuid;
 signals:
     void biditemsinfo(QString itemcode,QString price);
 };

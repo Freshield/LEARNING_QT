@@ -12,7 +12,7 @@ class BidPriceDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit BidPriceDialog(QWidget *parent = 0);
+    explicit BidPriceDialog(QWidget *parent,QString parentuid);
     ~BidPriceDialog();
 
 private slots:
@@ -20,6 +20,7 @@ private slots:
 
 private:
     Ui::BidPriceDialog *ui;
+    QString m_parentuid;
 signals:
     void itempriceget(QString price);
 };
