@@ -12,10 +12,12 @@ items::items(QObject *parent,QString name,QString buyer,QString owner,QString pr
     m_show = show;
 
     QTimer *m_timer = new QTimer(this);
+    thetimer = m_timer;
     m_timer->setSingleShot(true);
 
     connect(m_timer,SIGNAL(timeout()),this,SLOT(TimeoutProcess()));
-    m_timer->start(5000);
+    m_timer->start(300000);
+
 }
 
 void items::TimeoutProcess()
@@ -27,8 +29,14 @@ void items::TimeoutProcess()
 void items::SetTimeagain()
 {
     QTimer *m_timer = new QTimer(this);
+    thetimer = m_timer;
     m_timer->setSingleShot(true);
 
     connect(m_timer,SIGNAL(timeout()),this,SLOT(TimeoutProcess()));
-    m_timer->start(5000);
+    m_timer->start(300000);
+}
+
+void items::StopTime()
+{
+    thetimer->stop();
 }

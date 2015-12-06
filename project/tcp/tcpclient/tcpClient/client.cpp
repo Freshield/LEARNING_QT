@@ -179,7 +179,20 @@ void Client::readMessage()
         QMessageBox::information(this,tr("Bid success"),iteminfo);
         ui->messageLabel->setText("SERVER SEND:YOUR ITEM BID SUCCESS\n");
     }
-
+    //one item buyer is you but canceled cause owner shutdown
+    else if(message.contains("WAS CANCELLED CAUSE THE CLIENT SHUTDOWN\n"))
+    {
+        QString iteminfo = tr("The item infomation is below\n")+message.mid(message.indexOf("\n")+1,message.size()-message.indexOf("\n")-1);
+        QMessageBox::warning(this,tr("Item cancelled"),iteminfo);
+        ui->messageLabel->setText("SERVER SEND:YOUR BID WAS CANCELLED CAUSE THE CLIENT SHUTDOWN\n");
+    }
+    //one item owner is you but refresh cause buyer shutdown
+    else if(message.contains("WAS REFRESH CAUSE THE BUYER SHUTDOWN\n"))
+    {
+        QString iteminfo = tr("The item infomation is below\n")+message.mid(message.indexOf("\n")+1,message.size()-message.indexOf("\n")-1);
+        QMessageBox::warning(this,tr("Item refersh"),iteminfo);
+        ui->messageLabel->setText("SERVER SEND:YOUR ITEM WAS REFRESH CAUSE THE BUYER SHUTDOWN\n");
+    }
     else
     {
         ui->messageLabel->setText(message);

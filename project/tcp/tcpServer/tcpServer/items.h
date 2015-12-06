@@ -15,7 +15,9 @@ public:
     QString m_price;
     QString m_itemcode;
     QString m_show;
+    QTimer *thetimer;
     void SetTimeagain();
+    void StopTime();
 
 signals:
     void CallMainWindowTimeout(QString itemcode);

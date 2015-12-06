@@ -125,10 +125,65 @@ void Server::onNewConnection()
 void Server::DeleteOneClient(QString strIPandPort)
 {
     int m_Index = m_IPandPortList.indexOf(strIPandPort);
+    QString clientuid = uidlist[m_Index].number;
+    qDebug()<<clientuid;
     if(m_Index<0)
     {
         return;
     }
+    //figure out this client's item
+
+    for(int i = 0;i<itemlist.size();i++)
+    {
+        QString newitemtemp = tr("NAME:")+itemlist[i]->m_name+tr(" PRICE:")+itemlist[i]->m_price+tr(" BUYER:")+itemlist[i]->m_buyer+tr(" OWNER:")+itemlist[i]->m_owner+tr(" ITEMCODE:")+itemlist[i]->m_itemcode;
+
+        //for the owner is this client
+        if(itemlist[i]->m_owner == clientuid)
+        {
+            QString itembuyer = itemlist[i]->m_buyer;
+            QByteArray block = pickup_data(tr("SERVER SEND:SORRY,ITEM ")+itemlist[i]->m_name+tr(" WAS CANCELLED CAUSE THE CLIENT SHUTDOWN\n")+newitemtemp);
+            //find the buyer
+            for(int j = 0;j<uidlist.size();j++)
+            {
+                if(uidlist[j].number == itembuyer)
+                {
+                    m_ClientList[j]->SendBytes(block);
+                    break;
+                }
+            }
+            //remove this item
+            itemlist[i]->StopTime();
+            itemlist.removeAt(i);
+            ui->ItemlistWidget->takeItem(i);
+            continue;
+
+        }
+
+        //for the buyer is this client
+        if(itemlist[i]->m_buyer == clientuid)
+        {
+            QString itemowner = itemlist[i]->m_owner;
+            QByteArray block = pickup_data(tr("SERVER SEND:SORRY,ITEM ")+itemlist[i]->m_name+tr(" WAS REFRESH CAUSE THE BUYER SHUTDOWN\n")+newitemtemp);
+            //find the owner
+            for(int j = 0;j<uidlist.size();j++)
+            {
+                if(uidlist[j].number == itemowner)
+                {
+                    m_ClientList[j]->SendBytes(block);
+                    break;
+                }
+            }
+            //refresh the list
+            itemlist[i]->StopTime();
+            itemlist[i]->m_price = "0";
+            itemlist[i]->m_buyer = "NULL";
+            itemlist[i]->SetTimeagain();
+            QString theitemtemp = tr("NAME:")+itemlist[i]->m_name+tr(" PRICE:")+itemlist[i]->m_price+tr(" BUYER:")+itemlist[i]->m_buyer+tr(" OWNER:")+itemlist[i]->m_owner+tr(" ITEMCODE:")+itemlist[i]->m_itemcode;
+            ui->ItemlistWidget->item(i)->setText(theitemtemp);
+        }
+
+    }
+
     ui->listWidget->takeItem(m_Index);
     m_IPandPortList.removeAt(m_Index);
     m_ClientList.removeAt(m_Index);
