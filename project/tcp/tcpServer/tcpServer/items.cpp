@@ -15,7 +15,7 @@ items::items(QObject *parent,QString name,QString buyer,QString owner,QString pr
     m_timer->setSingleShot(true);
 
     connect(m_timer,SIGNAL(timeout()),this,SLOT(TimeoutProcess()));
-    m_timer->start(2000);
+    m_timer->start(5000);
 }
 
 void items::TimeoutProcess()
@@ -30,5 +30,5 @@ void items::SetTimeagain()
     m_timer->setSingleShot(true);
 
     connect(m_timer,SIGNAL(timeout()),this,SLOT(TimeoutProcess()));
-    m_timer->start(2000);
+    m_timer->start(5000);
 }

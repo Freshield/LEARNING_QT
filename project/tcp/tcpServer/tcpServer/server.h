@@ -58,6 +58,7 @@ private slots:
     //response the slot
     void on_pushButton_clicked();//send the message
     void readMessage(QString strIPandPort,QString data);//read slot
+    void itemtimeout(QString itemcode);
 
     void onNewConnection();//new connect
     void DeleteOneClient(QString strIPandPort);//delete client

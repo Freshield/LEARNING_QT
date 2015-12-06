@@ -157,6 +157,29 @@ void Client::readMessage()
         ui->messageLabel->setText("SERVER SEND:YOUR DEREGIST SUCCESS\n");
 
     }
+    //someone bid client's item
+    else if(message.contains("SERVER SEND:YOUR ITEM HAVE BID"))
+    {
+        QString iteminfo = tr("The bid item infomation is below\n")+message.mid(message.indexOf("\n")+1,message.size()-message.indexOf("\n")-1);
+        QMessageBox::information(this,tr("Bid have"),iteminfo);
+        ui->messageLabel->setText("SERVER SEND:YOUR ITEM HAVE BID\n");
+
+    }
+    //one item sale success
+    else if(message.contains("TRADE SUCCESS\n"))
+    {
+        QString iteminfo = tr("The item infomation is below\n")+message.mid(message.indexOf("\n")+1,message.size()-message.indexOf("\n")-1);
+        QMessageBox::information(this,tr("Trade success"),iteminfo);
+        ui->messageLabel->setText("SERVER SEND:YOUR ITEM TRADE SUCCESS\n");
+    }
+    //one item bid success
+    else if(message.contains("BID SUCCESS\n"))
+    {
+        QString iteminfo = tr("The item infomation is below\n")+message.mid(message.indexOf("\n")+1,message.size()-message.indexOf("\n")-1);
+        QMessageBox::information(this,tr("Bid success"),iteminfo);
+        ui->messageLabel->setText("SERVER SEND:YOUR ITEM BID SUCCESS\n");
+    }
+
     else
     {
         ui->messageLabel->setText(message);

@@ -64,13 +64,13 @@ void BidItemDialog::on_listWidget_itemDoubleClicked(QListWidgetItem* item)
     QString theitemcode = itemtemp.mid(itemtemp.indexOf(tr("ITEMCODE:"))+9,itemtemp.indexOf(";")-itemtemp.indexOf(tr("ITEMCODE:"))-9);
     m_itemscode = theitemcode;
     //figure out if the owner is the same
-    /*
+
     if(theitemowner == m_parentuid)
     {
         QMessageBox::warning(this,tr("Owner"),tr("You can not bid item belong yourself"));
         return;
     }
-    */
+
     BidPriceDialog *newbidprice = new BidPriceDialog(this,m_parentuid);
     connect(newbidprice,SIGNAL(itempriceget(QString)),this,SLOT(itempricegot(QString)),Qt::QueuedConnection);
     newbidprice->show();

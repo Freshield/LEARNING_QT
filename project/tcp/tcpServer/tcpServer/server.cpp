@@ -312,6 +312,7 @@ void Server::readMessage(QString strIPandPort,QString data)
                     ui->ItemlistWidget->addItem(newitemtemp);
                     QByteArray block = pickup_data(tr("SERVER SEND:YOUR ITEM ")+newitem->m_name+tr("\nSUBMIT SUCCESSED"));
                     m_ClientList[listnum2]->SendBytes(block);
+                    connect(newitem,SIGNAL(CallMainWindowTimeout(QString)),this,SLOT(itemtimeout(QString)));
 
                     }
 
@@ -408,6 +409,8 @@ void Server::readMessage(QString strIPandPort,QString data)
                         //TO DO
                             QString biditemcode = message_data.mid(message_data.indexOf("<itecod>")+8,message_data.indexOf("</iteco>")-message_data.indexOf("<itecod>")-8);
                             QString biditemprice = message_data.mid(message_data.indexOf("<itepri>")+8,message_data.indexOf("</itepr>")-message_data.indexOf("<itepri>")-8);
+                            QString biditemowner;
+                            QString itemtemp;
                             int ifgetitem = 0;
                             for(int i = 0;i < itemlist.size();i++)
                             {
@@ -416,8 +419,9 @@ void Server::readMessage(QString strIPandPort,QString data)
                                    ifgetitem = 1;
                                    itemlist[i]->m_price = biditemprice;
                                    itemlist[i]->m_buyer = message_uid;
+                                   biditemowner = itemlist[i]->m_owner;
 
-                                   QString itemtemp = ui->ItemlistWidget->item(i)->text();
+                                   itemtemp = ui->ItemlistWidget->item(i)->text();
                                    QString firstpart = itemtemp.mid(0,itemtemp.indexOf(" PRICE:"));
                                    QString secondpart = itemtemp.mid(itemtemp.indexOf(" OWNER:"),itemtemp.size()-itemtemp.indexOf(" OWNER:"));
                                    itemtemp = firstpart+tr(" PRICE:")+biditemprice+tr(" BUYER:")+message_uid+secondpart;
@@ -437,6 +441,18 @@ void Server::readMessage(QString strIPandPort,QString data)
                             {
                                 QByteArray block = pickup_data(tr("SERVER SEND:YOUR BID SUCCESS"));
                                 m_ClientList[listnum2]->SendBytes(block);
+                                //find the owner
+                                int listowner;
+                                for(int i = 0;i < uidlist.size();i++)
+                                {
+                                    if(uidlist[i].number == biditemowner)
+                                    {
+                                        listowner = i;
+                                        break;
+                                    }
+                                }
+                                block = pickup_data(tr("SERVER SEND:YOUR ITEM HAVE BID\n")+itemtemp);
+                                m_ClientList[listowner]->SendBytes(block);
                                 ui->label->setText(tr("CLIENT UID")+message_uid+tr("BID SUCCESS")+temp);
                             }
                         }
@@ -832,6 +848,65 @@ void Server::readMessage(QString strIPandPort,QString data)
     }
 
 
+}
+
+void Server::itemtimeout(QString itemcode)
+{
+    //find the item listnum
+    int itemlistnum;
+    QString itemowner;
+    QString itembuyer;
+    QString temp = tr("\n")+ui->label->text();
+    for(itemlistnum = 0;itemlistnum < itemlist.size();itemlistnum++)
+    {
+        if(itemlist[itemlistnum]->m_itemcode == itemcode)
+        {
+            itemowner = itemlist[itemlistnum]->m_owner;
+            itembuyer = itemlist[itemlistnum]->m_buyer;
+            break;
+        }
+    }
+    //figure out if there have a buyer
+    //if not
+    if(itemlist[itemlistnum]->m_buyer == "NULL")
+    {
+
+        itemlist[itemlistnum]->SetTimeagain();
+        //find the owner
+        for(int i = 0;i<uidlist.size();i++)
+        {
+            if(uidlist[i].number == itemowner)
+            {
+                QByteArray block = pickup_data(tr("SERVER SEND:YOU ITEM ")+itemlist[itemlistnum]->m_name+tr(" TIMEOUT\nBUT DO NOT HAVE BUYER\nTIME REFRESH AGAIN"));
+                m_ClientList[i]->SendBytes(block);
+            }
+        }
+        ui->label->setText(tr("Item ")+itemcode+tr(" timeout and refresh again")+temp);
+
+    }
+    else
+    {
+        QString newitemtemp = tr("NAME:")+itemlist[itemlistnum]->m_name+tr(" PRICE:")+itemlist[itemlistnum]->m_price+tr(" BUYER:")+itemlist[itemlistnum]->m_buyer+tr(" OWNER:")+itemlist[itemlistnum]->m_owner+tr(" ITEMCODE:")+itemlist[itemlistnum]->m_itemcode;
+
+        //find the owner
+        for(int i = 0;i<uidlist.size();i++)
+        {
+            if(uidlist[i].number == itemowner)
+            {
+                QByteArray block = pickup_data(tr("SERVER SEND:YOU ITEM ")+itemlist[itemlistnum]->m_name+tr(" TRADE SUCCESS\n")+newitemtemp);
+                m_ClientList[i]->SendBytes(block);
+            }
+            if(uidlist[i].number == itembuyer)
+            {
+                QByteArray block = pickup_data(tr("SERVER SEND:YOU ITEM ")+itemlist[itemlistnum]->m_name+tr(" BID SUCCESS\n")+newitemtemp);
+                m_ClientList[i]->SendBytes(block);
+            }
+        }
+
+        ui->ItemlistWidget->takeItem(itemlistnum);
+        itemlist.removeAt(itemlistnum);
+        ui->label->setText(tr("Item ")+itemcode+tr(" trade finished")+temp);
+    }
 }
 
 /*
