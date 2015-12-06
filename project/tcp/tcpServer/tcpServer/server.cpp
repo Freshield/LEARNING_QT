@@ -310,7 +310,7 @@ void Server::readMessage(QString strIPandPort,QString data)
                     QString newitemtemp = tr("NAME:")+newitem->m_name+tr(" PRICE:")+newitem->m_price+tr(" BUYER:")+newitem->m_buyer+tr(" OWNER:")+newitem->m_owner+tr(" ITEMCODE:")+newitem->m_itemcode;
 
                     ui->ItemlistWidget->addItem(newitemtemp);
-                    QByteArray block = pickup_data(tr("SERVER SEND:YOUR ITEM ")+newitem->m_name+tr("SUBMIT SUCCESSED"));
+                    QByteArray block = pickup_data(tr("SERVER SEND:YOUR ITEM ")+newitem->m_name+tr("\nSUBMIT SUCCESSED"));
                     m_ClientList[listnum2]->SendBytes(block);
 
                     }
