@@ -126,7 +126,6 @@ void Server::DeleteOneClient(QString strIPandPort)
 {
     int m_Index = m_IPandPortList.indexOf(strIPandPort);
     QString clientuid = uidlist[m_Index].number;
-    qDebug()<<clientuid;
     if(m_Index<0)
     {
         return;
@@ -153,6 +152,7 @@ void Server::DeleteOneClient(QString strIPandPort)
             }
             //remove this item
             itemlist[i]->StopTime();
+            delete itemlist[i];
             itemlist.removeAt(i);
             ui->ItemlistWidget->takeItem(i);
             continue;
@@ -186,6 +186,7 @@ void Server::DeleteOneClient(QString strIPandPort)
 
     ui->listWidget->takeItem(m_Index);
     m_IPandPortList.removeAt(m_Index);
+    delete m_ClientList[m_Index];
     m_ClientList.removeAt(m_Index);
     uidlist.removeAt(m_Index);
 }
@@ -778,6 +779,8 @@ void Server::readMessage(QString strIPandPort,QString data)
                                    ifgetitem = 1;
 
                                    ui->ItemlistWidget->takeItem(i);
+                                   itemlist[i]->StopTime();
+                                   delete itemlist[i];
                                    itemlist.removeAt(i);
 
 
@@ -818,6 +821,7 @@ void Server::readMessage(QString strIPandPort,QString data)
                     {
                         QByteArray block = pickup_data(tr("SERVER SEND:YOU ARE NOT REGISTED"));
                         m_ClientList[listnum2]->SendBytes(block);
+                        break;
                     }
                     //registed then see items
                     else
@@ -829,11 +833,15 @@ void Server::readMessage(QString strIPandPort,QString data)
 
                             QByteArray block = pickup_data(tr("SERVER SEND:YOUR DEREGIST SUCCESS\n"));
                             m_ClientList[listnum2]->SendBytes(block);
+
+                            delete m_ClientList[listnum2];
                             m_ClientList.removeAt(listnum2);
                             uidlist.removeAt(listnum2);
                             ui->listWidget->takeItem(listnum2);
                             m_IPandPortList.removeAt(listnum2);
                             ui->label->setText(tr("CLIENT UID")+message_uid+tr("DEREGIST SUCCESS")+temp);
+                            break;
+
                         }
                         //figure out the item
                         else
@@ -858,7 +866,9 @@ void Server::readMessage(QString strIPandPort,QString data)
                             if(ifhaveclientbid == 0)
                             {
                                 QByteArray block = pickup_data(tr("SERVER SEND:YOUR DEREGIST SUCCESS\n"));
+
                                 m_ClientList[listnum2]->SendBytes(block);
+                                delete m_ClientList[listnum2];
                                 m_ClientList.removeAt(listnum2);
                                 uidlist.removeAt(listnum2);
                                 ui->listWidget->takeItem(listnum2);
@@ -959,6 +969,8 @@ void Server::itemtimeout(QString itemcode)
         }
 
         ui->ItemlistWidget->takeItem(itemlistnum);
+        itemlist[itemlistnum]->StopTime();
+        delete itemlist[itemlistnum];
         itemlist.removeAt(itemlistnum);
         ui->label->setText(tr("Item ")+itemcode+tr(" trade finished")+temp);
     }
