@@ -51,7 +51,7 @@ void BidItemDialog::on_listWidget_itemDoubleClicked(QListWidgetItem* item)
 {
     QString itemtemp = item->text();
     QString theitemowner = itemtemp.mid(itemtemp.indexOf(tr("OWNER:"))+6,itemtemp.indexOf(" ITEMCODE:")-itemtemp.indexOf(tr("OWNER:"))-6);
-    m_itemprice = itemtemp.mid(itemtemp.indexOf(tr("PRICE:")+6),itemtemp.indexOf(tr(" BUYER:"))-itemtemp.indexOf(tr("PRICE:"))-6);
+    m_itemprice = itemtemp.mid(itemtemp.indexOf(tr("PRICE:"))+6,itemtemp.indexOf(tr(" BUYER:"))-itemtemp.indexOf(tr("PRICE:"))-6);
     QString theitemcode = itemtemp.mid(itemtemp.indexOf(tr("ITEMCODE:"))+9,itemtemp.indexOf(";")-itemtemp.indexOf(tr("ITEMCODE:"))-9);
     m_itemscode = theitemcode;
     BidPriceDialog *newbidprice = new BidPriceDialog(this);

@@ -184,7 +184,7 @@ void Server::send_to_client(QTcpSocket *socket, QString data)
 void Server::readMessage(QString strIPandPort,QString data)
 {
 
-    QString temp = ui->label->text() + "\n";
+    QString temp = tr("\n")+ui->label->text();
     QString uidtemp;
     int listnum;
 
@@ -227,7 +227,7 @@ void Server::readMessage(QString strIPandPort,QString data)
                     ui->listWidget->item(listnum2)->setText(listtemp+tr(" name:")+message_data);
                     QByteArray block = pickup_data(tr("SERVER SEND:YOUR REGISTED SUCCESS"));
                     m_ClientList[listnum2]->SendBytes(block);
-                    ui->label->setText(temp + tr("UID")+message_uid+tr(" regist success\nthe name is ")+message_data);
+                    ui->label->setText(tr("UID")+message_uid+tr(" regist success\nthe name is ")+message_data+temp);
                     break;
                 }
 
@@ -258,7 +258,7 @@ void Server::readMessage(QString strIPandPort,QString data)
                         {
                             QByteArray block = pickup_data(tr("SERVER SEND:THERE HAVE NO ITEMS NOW"));
                             m_ClientList[listnum2]->SendBytes(block);
-                            ui->label->setText(temp +tr("CLIENT UID")+message_uid+tr("ASK ALL BID BUT NO ITEMS"));
+                            ui->label->setText(tr("CLIENT UID")+message_uid+tr("ASK ALL BID BUT NO ITEMS")+temp);
                         }
                         //send all items information
                         else
@@ -273,7 +273,7 @@ void Server::readMessage(QString strIPandPort,QString data)
                             }
                             QByteArray block = pickup_data(iteminfotemp);
                             m_ClientList[listnum2]->SendBytes(block);
-                            ui->label->setText(temp +tr("CLIENT UID")+message_uid+tr("ASK ALL BID"));
+                            ui->label->setText(tr("CLIENT UID")+message_uid+tr("ASK ALL BID")+temp);
 
                         }
                     }
@@ -346,7 +346,7 @@ void Server::readMessage(QString strIPandPort,QString data)
                         {
                             QByteArray block = pickup_data(tr("SERVER SEND:THERE HAVE NO ITEMS NOW"));
                             m_ClientList[listnum2]->SendBytes(block);
-                            ui->label->setText(temp +tr("CLIENT UID")+message_uid+tr("WANT A BID BUT NO ITEMS"));
+                            ui->label->setText(tr("CLIENT UID")+message_uid+tr("WANT A BID BUT NO ITEMS")+temp);
                         }
                         //send all items information
                         else
@@ -361,7 +361,7 @@ void Server::readMessage(QString strIPandPort,QString data)
                             }
                             QByteArray block = pickup_data(iteminfotemp);
                             m_ClientList[listnum2]->SendBytes(block);
-                            ui->label->setText(temp +tr("CLIENT UID")+message_uid+tr("WANT A BID"));
+                            ui->label->setText(tr("CLIENT UID")+message_uid+tr("WANT A BID")+temp);
 
                         }
 
@@ -400,7 +400,7 @@ void Server::readMessage(QString strIPandPort,QString data)
                         {
                             QByteArray block = pickup_data(tr("SERVER SEND:THERE HAVE NO ITEMS NOW"));
                             m_ClientList[listnum2]->SendBytes(block);
-                            ui->label->setText(temp +tr("CLIENT UID")+message_uid+tr("WANT A BID BUT NO ITEMS"));
+                            ui->label->setText(tr("CLIENT UID")+message_uid+tr("WANT A BID BUT NO ITEMS")+temp);
                         }
                         //send all items information
                         else
@@ -431,13 +431,13 @@ void Server::readMessage(QString strIPandPort,QString data)
                             {
                                 QByteArray block = pickup_data(tr("SERVER SEND:YOUR BID FAILED\nCAUSE NOT FIND THE ITEM"));
                                 m_ClientList[listnum2]->SendBytes(block);
-                                ui->label->setText(temp +tr("CLIENT UID")+message_uid+tr("BID FAILED\nCAUSE NOT FIND THE ITEM"));
+                                ui->label->setText(tr("CLIENT UID")+message_uid+tr("BID FAILED\nCAUSE NOT FIND THE ITEM")+temp);
                             }
                             else
                             {
                                 QByteArray block = pickup_data(tr("SERVER SEND:YOUR BID SUCCESS"));
                                 m_ClientList[listnum2]->SendBytes(block);
-                                ui->label->setText(temp +tr("CLIENT UID")+message_uid+tr("BID SUCCESS"));
+                                ui->label->setText(tr("CLIENT UID")+message_uid+tr("BID SUCCESS")+temp);
                             }
 
 
@@ -455,7 +455,7 @@ void Server::readMessage(QString strIPandPort,QString data)
         }
         else
         {
-            ui->label->setText(temp + data);
+            ui->label->setText(temp+temp);
 
         }
 
@@ -464,7 +464,7 @@ void Server::readMessage(QString strIPandPort,QString data)
     else
     {
 
-        ui->label->setText(temp + data);
+        ui->label->setText(data+temp);
 
     }
 

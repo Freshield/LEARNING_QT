@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'server.ui'
 **
-** Created: Sat Dec 5 20:29:41 2015
+** Created: Sun Dec 6 00:16:58 2015
 **      by: Qt User Interface Compiler version 4.7.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -46,6 +46,7 @@ public:
         label->setGeometry(QRect(10, 430, 931, 711));
         label->setFrameShape(QFrame::Panel);
         label->setFrameShadow(QFrame::Sunken);
+        label->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
         label->setWordWrap(true);
         lineEdit = new QLineEdit(Server);
         lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
