@@ -5,6 +5,7 @@
 #include <QMessageBox>
 #include "submitdialog.h"
 #include "seeallbiddialog.h"
+#include "biditemdialog.h"
 
 Client::Client(QWidget *parent) :
     QDialog(parent),
@@ -87,7 +88,15 @@ void Client::readMessage()
     {
         SeeAllBidDialog *newseeallbid = new SeeAllBidDialog(this,message);
         newseeallbid->show();
+        ui->messageLabel->setText("SERVER SEND:ALL BID IS BELOW");
 
+    }
+    else if(message.contains("SERVER SEND:ALL ITEM YOU CAN BID IS BELOW\n"))
+    {
+        BidItemDialog *newbiditem = new BidItemDialog(this,message);
+        connect(newbiditem,SIGNAL(biditemsinfo(QString,QString)),this,SLOT(getbiditem(QString,QString)),Qt::QueuedConnection);
+        newbiditem->show();
+        ui->messageLabel->setText("SERVER SEND:GET BID ITEM");
     }
     else
     {
@@ -196,4 +205,23 @@ void Client::submititems(QString itemname)
     QByteArray block = pickup_data(message);
     tcpSocket->write(block);
     ui->messageLabel->setText(tr("SUBMIT AN ITEM\nNAME IS")+itemname);
+}
+
+void Client::on_bid_pushButton_clicked()
+{
+    QString message = format_message("3",tr("I WANT TO BID AN ITEM"));
+    QByteArray block = pickup_data(message);
+    tcpSocket->write(block);
+}
+
+
+void Client::getbiditem(QString itemscode, QString itemprice)
+{
+    //ui->messageLabel->setText(itemscode+itemprice);
+
+    QString messagetemp = tr("<itecod>")+itemscode+tr("</iteco>")+tr("<itepri>")+itemprice+tr("</itepr>");
+    QString message = format_message("31",messagetemp);
+    QByteArray block = pickup_data(message);
+    tcpSocket->write(block);
+
 }

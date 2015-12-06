@@ -321,6 +321,140 @@ void Server::readMessage(QString strIPandPort,QString data)
             }
 
         }
+        //bid an item
+        else if(message_header == "3")
+        {
+            int listnum2;
+            //get the list place
+            for(listnum2 = 0;listnum2<uidlist.size();listnum2++)
+            {
+                //find the uid
+                if(message_uid == uidlist[listnum2].number)
+                {
+                    //figure out if it is registed
+                    if(uidlist[listnum2].registed == "no")
+                    {
+                        QByteArray block = pickup_data(tr("SERVER SEND:YOU ARE NOT REGISTED"));
+                        m_ClientList[listnum2]->SendBytes(block);
+                    }
+                    //registed then see items
+                    else
+                    {
+                    //TO DO
+                        //if not have items
+                        if(itemlist.size() < 1)
+                        {
+                            QByteArray block = pickup_data(tr("SERVER SEND:THERE HAVE NO ITEMS NOW"));
+                            m_ClientList[listnum2]->SendBytes(block);
+                            ui->label->setText(temp +tr("CLIENT UID")+message_uid+tr("WANT A BID BUT NO ITEMS"));
+                        }
+                        //send all items information
+                        else
+                        {
+                            QString iteminfotemp = tr("SERVER SEND:ALL ITEM YOU CAN BID IS BELOW\n<ITSZ>")+QString::number(itemlist.size())+tr("</ITS>");
+                            for(int i = 0;i < itemlist.size();i++)
+                            {
+                                QString temp = iteminfotemp+tr("\n<ITN")+QString::number(i)+tr(">");
+                                iteminfotemp = temp+tr("NAME:")+itemlist[i]->m_name+tr(" PRICE:")+itemlist[i]->m_price+tr(" BUYER:")+itemlist[i]->m_buyer+tr(" OWNER:")+itemlist[i]->m_owner+tr(" ITEMCODE:")+itemlist[i]->m_itemcode+tr("</IT")+QString::number(i)+tr(">");
+
+
+                            }
+                            QByteArray block = pickup_data(iteminfotemp);
+                            m_ClientList[listnum2]->SendBytes(block);
+                            ui->label->setText(temp +tr("CLIENT UID")+message_uid+tr("WANT A BID"));
+
+                        }
+
+
+
+                    }
+
+                    break;
+                }
+
+            }
+
+        }
+        //get the bid item
+        else if(message_header == "31")
+        {
+            int listnum2;
+            //get the list place
+            for(listnum2 = 0;listnum2<uidlist.size();listnum2++)
+            {
+                //find the uid
+                if(message_uid == uidlist[listnum2].number)
+                {
+                    //figure out if it is registed
+                    if(uidlist[listnum2].registed == "no")
+                    {
+                        QByteArray block = pickup_data(tr("SERVER SEND:YOU ARE NOT REGISTED"));
+                        m_ClientList[listnum2]->SendBytes(block);
+                    }
+                    //registed then see items
+                    else
+                    {
+                    //TO DO
+                        //if not have items
+                        if(itemlist.size() < 1)
+                        {
+                            QByteArray block = pickup_data(tr("SERVER SEND:THERE HAVE NO ITEMS NOW"));
+                            m_ClientList[listnum2]->SendBytes(block);
+                            ui->label->setText(temp +tr("CLIENT UID")+message_uid+tr("WANT A BID BUT NO ITEMS"));
+                        }
+                        //send all items information
+                        else
+                        {
+                        //TO DO
+                            QString biditemcode = message_data.mid(message_data.indexOf("<itecod>")+8,message_data.indexOf("</iteco>")-message_data.indexOf("<itecod>")-8);
+                            QString biditemprice = message_data.mid(message_data.indexOf("<itepri>")+8,message_data.indexOf("</itepr>")-message_data.indexOf("<itepri>")-8);
+                            qDebug()<<biditemcode;
+                            qDebug()<<biditemprice;
+                            int ifgetitem = 0;
+                            for(int i = 0;i < itemlist.size();i++)
+                            {
+                               if(itemlist[i]->m_itemcode == biditemcode)
+                               {
+                                   ifgetitem = 1;
+                                   itemlist[i]->m_price = biditemprice;
+                                   itemlist[i]->m_buyer = message_uid;
+
+                                   QString itemtemp = ui->ItemlistWidget->item(i)->text();
+                                   QString firstpart = itemtemp.mid(0,itemtemp.indexOf(" PRICE:"));
+                                   QString secondpart = itemtemp.mid(itemtemp.indexOf(" OWNER:"),itemtemp.size()-itemtemp.indexOf(" OWNER:"));
+                                   itemtemp = firstpart+tr(" PRICE:")+biditemprice+tr(" BUYER:")+message_uid+secondpart;
+
+                                   ui->ItemlistWidget->item(i)->setText(itemtemp);
+                                   break;
+                               }
+                            }
+                            //see if success get the item
+                            if(ifgetitem == 0)
+                            {
+                                QByteArray block = pickup_data(tr("SERVER SEND:YOUR BID FAILED\nCAUSE NOT FIND THE ITEM"));
+                                m_ClientList[listnum2]->SendBytes(block);
+                                ui->label->setText(temp +tr("CLIENT UID")+message_uid+tr("BID FAILED\nCAUSE NOT FIND THE ITEM"));
+                            }
+                            else
+                            {
+                                QByteArray block = pickup_data(tr("SERVER SEND:YOUR BID SUCCESS"));
+                                m_ClientList[listnum2]->SendBytes(block);
+                                ui->label->setText(temp +tr("CLIENT UID")+message_uid+tr("BID SUCCESS"));
+                            }
+
+
+                        }
+
+
+
+                    }
+
+                    break;
+                }
+
+            }
+
+        }
         else
         {
             ui->label->setText(temp + data);

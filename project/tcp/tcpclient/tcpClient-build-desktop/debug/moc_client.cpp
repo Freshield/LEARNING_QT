@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'client.h'
 **
-** Created: Sat Dec 5 20:52:30 2015
+** Created: Sat Dec 5 22:33:02 2015
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.2)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_Client[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-      11,   14, // methods
+      13,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -41,9 +41,11 @@ static const uint qt_meta_data_Client[] = {
      130,    7,    7,    7, 0x08,
      154,    7,    7,    7, 0x08,
      177,  168,    7,    7, 0x08,
-     198,    7,    7,    7, 0x08,
-     229,    7,    7,    7, 0x08,
-     265,    7,    7,    7, 0x08,
+     218,  198,    7,    7, 0x08,
+     246,    7,    7,    7, 0x08,
+     277,    7,    7,    7, 0x08,
+     313,    7,    7,    7, 0x08,
+     344,    7,    7,    7, 0x08,
 
        0        // eod
 };
@@ -55,9 +57,11 @@ static const char qt_meta_stringdata_Client[] = {
     "on_connectButton_clicked()\0"
     "on_pushButton_clicked()\0ifconnected()\0"
     "itemname\0submititems(QString)\0"
+    "itemscode,itemprice\0getbiditem(QString,QString)\0"
     "on_regist_pushButton_clicked()\0"
     "on_see_all_bid_pushButton_clicked()\0"
     "on_submit_pushButton_clicked()\0"
+    "on_bid_pushButton_clicked()\0"
 };
 
 const QMetaObject Client::staticMetaObject = {
@@ -97,12 +101,14 @@ int Client::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 5: on_pushButton_clicked(); break;
         case 6: ifconnected(); break;
         case 7: submititems((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 8: on_regist_pushButton_clicked(); break;
-        case 9: on_see_all_bid_pushButton_clicked(); break;
-        case 10: on_submit_pushButton_clicked(); break;
+        case 8: getbiditem((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
+        case 9: on_regist_pushButton_clicked(); break;
+        case 10: on_see_all_bid_pushButton_clicked(); break;
+        case 11: on_submit_pushButton_clicked(); break;
+        case 12: on_bid_pushButton_clicked(); break;
         default: ;
         }
-        _id -= 11;
+        _id -= 13;
     }
     return _id;
 }

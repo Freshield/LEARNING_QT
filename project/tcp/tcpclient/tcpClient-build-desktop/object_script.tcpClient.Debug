@@ -1,0 +1,13 @@
+INPUT(
+./debug\main.o
+./debug\client.o
+./debug\submitdialog.o
+./debug\seeallbiddialog.o
+./debug\biditemdialog.o
+./debug\bidpricedialog.o
+./debug\moc_client.o
+./debug\moc_submitdialog.o
+./debug\moc_seeallbiddialog.o
+./debug\moc_biditemdialog.o
+./debug\moc_bidpricedialog.o
+);
