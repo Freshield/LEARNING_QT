@@ -13,12 +13,14 @@ Client::Client(QWidget *parent) :
     ui(new Ui::Client)
 {
     ui->setupUi(this);
+    /*
     tcpSocket = new QTcpSocket(this);
     uidnum = "NULL";
     connect(tcpSocket,SIGNAL(readyRead()),this,SLOT(readMessage()));
     connect(tcpSocket,SIGNAL(error(QAbstractSocket::SocketError)),this,SLOT(displayError(QAbstractSocket::SocketError)));
 
     connect(tcpSocket,SIGNAL(connected()),this,SLOT(ifconnected()));
+    */
 }
 
 Client::~Client()
@@ -29,6 +31,12 @@ Client::~Client()
 void Client::newConnect()
 {
     blockSize = 0;
+    tcpSocket = new QTcpSocket(this);
+    uidnum = "NULL";
+    connect(tcpSocket,SIGNAL(readyRead()),this,SLOT(readMessage()));
+    connect(tcpSocket,SIGNAL(error(QAbstractSocket::SocketError)),this,SLOT(displayError(QAbstractSocket::SocketError)));
+
+    connect(tcpSocket,SIGNAL(connected()),this,SLOT(ifconnected()));
 
     tcpSocket->abort();
     tcpSocket->connectToHost(ui->hostLineEdit->text(),ui->portLineEdit->text().toInt());
@@ -124,6 +132,29 @@ void Client::readMessage()
         connect(newwithdrawitem,SIGNAL(biditemsinfo(QString)),this,SLOT(withdrawiteminfo(QString)));
         newwithdrawitem->show();
         ui->messageLabel->setText("SERVER SEND:ALL ITEM BELONG TO YOU IS BELOW\n");
+
+    }
+    //deregist
+    else if(message.contains("SERVER SEND:YOUR DEREGIST SUCCESS"))
+    {
+        name = "";
+        uidnum = "NULL";
+        ui->sendLineEdit->setText("");
+        ui->uidnum_label->setText("");
+        ui->namelabel->setText("");
+        ui->sendLineEdit->setEnabled(false);
+        ui->regist_pushButton->setEnabled(false);
+        ui->bid_pushButton->setEnabled(false);
+        ui->see_all_bid_pushButton->setEnabled(false);
+        ui->see_all_your_bid_pushButton->setEnabled(false);
+        ui->submit_pushButton->setEnabled(false);
+        ui->deregist_pushButton->setEnabled(false);
+        ui->withdraw_pushButton->setEnabled(false);
+        ui->see_all_your_item_pushButton->setEnabled(false);
+        ui->connectButton->setEnabled(true);
+        ui->hostLineEdit->setEnabled(true);
+        ui->portLineEdit->setEnabled(true);
+        ui->messageLabel->setText("SERVER SEND:YOUR DEREGIST SUCCESS\n");
 
     }
     else
@@ -281,6 +312,13 @@ void Client::on_withdraw_pushButton_clicked()
 void Client::withdrawiteminfo(QString itemscode)
 {
     QString message = format_message("71",itemscode);
+    QByteArray block = pickup_data(message);
+    tcpSocket->write(block);
+}
+
+void Client::on_deregist_pushButton_clicked()
+{
+    QString message = format_message("6",tr("I WANT TO DEREGISTER"));
     QByteArray block = pickup_data(message);
     tcpSocket->write(block);
 }

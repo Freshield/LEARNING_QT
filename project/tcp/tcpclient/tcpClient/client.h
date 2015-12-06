@@ -57,6 +57,8 @@ private slots:
 
 
 
+    void on_deregist_pushButton_clicked();
+
 signals:
     void allbidinfo(QString data);
 };

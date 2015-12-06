@@ -732,6 +732,90 @@ void Server::readMessage(QString strIPandPort,QString data)
                 }
             }
         }
+        //client want to deregist
+        else if(message_header == "6")
+        {
+            int listnum2;
+            //get the list place
+            for(listnum2 = 0;listnum2<uidlist.size();listnum2++)
+            {
+                //find the uid
+                if(message_uid == uidlist[listnum2].number)
+                {
+                    //figure out if it is registed
+                    if(uidlist[listnum2].registed == "no")
+                    {
+                        QByteArray block = pickup_data(tr("SERVER SEND:YOU ARE NOT REGISTED"));
+                        m_ClientList[listnum2]->SendBytes(block);
+                    }
+                    //registed then see items
+                    else
+                    {
+                    //TO DO
+                        //if not have items
+                        if(itemlist.size() < 1)
+                        {
+
+                            QByteArray block = pickup_data(tr("SERVER SEND:YOUR DEREGIST SUCCESS\n"));
+                            m_ClientList[listnum2]->SendBytes(block);
+                            m_ClientList.removeAt(listnum2);
+                            uidlist.removeAt(listnum2);
+                            ui->listWidget->takeItem(listnum2);
+                            m_IPandPortList.removeAt(listnum2);
+                            ui->label->setText(tr("CLIENT UID")+message_uid+tr("DEREGIST SUCCESS")+temp);
+                        }
+                        //figure out the item
+                        else
+                        {
+                            //figure out if there have client's item
+                            int ifhaveclientbid = 0;
+                            for(int i = 0;i < itemlist.size();i++)
+                            {
+                                if(itemlist[i]->m_owner == message_uid)
+                                {
+
+                                    ifhaveclientbid ++;
+                                }
+                                if(itemlist[i]->m_buyer == message_uid)
+                                {
+                                    ifhaveclientbid ++;
+
+                                }
+
+                            }
+                            //see if client have bid or item
+                            if(ifhaveclientbid == 0)
+                            {
+                                QByteArray block = pickup_data(tr("SERVER SEND:YOUR DEREGIST SUCCESS\n"));
+                                m_ClientList[listnum2]->SendBytes(block);
+                                m_ClientList.removeAt(listnum2);
+                                uidlist.removeAt(listnum2);
+                                ui->listWidget->takeItem(listnum2);
+                                m_IPandPortList.removeAt(listnum2);
+                                ui->label->setText(tr("CLIENT UID")+message_uid+tr("DEREGIST SUCCESS")+temp);
+                            }
+                            //if have
+                            else
+                            {
+
+                                QByteArray block = pickup_data(tr("SERVER SEND:YOU DEREGIST FAILED\nCAUSE YOU HAVE BID OR ITEM NOW\n"));
+                                m_ClientList[listnum2]->SendBytes(block);
+                                ui->label->setText(tr("CLIENT UID")+message_uid+tr("DEREGIST FAILED\nCAUSE YOU HAVE BID OR ITEM NOW\n")+temp);
+                            }
+
+
+                        }
+
+
+
+                    }
+
+                    break;
+                }
+
+            }
+
+        }
         else
         {
             ui->label->setText(data+temp);
