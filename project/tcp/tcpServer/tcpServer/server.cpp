@@ -15,6 +15,7 @@ Server::Server(QWidget *parent) :
 {
     ui->setupUi(this);
     UID_NUM = 100;
+    ITEM_NUM = 1000;
     //create new server
 
     m_server = new QTcpServer(this);
@@ -233,6 +234,93 @@ void Server::readMessage(QString strIPandPort,QString data)
             }
 
         }
+        //see all bid
+        else if(message_header == "1")
+        {
+            int listnum2;
+            //get the list place
+            for(listnum2 = 0;listnum2<uidlist.size();listnum2++)
+            {
+                //find the uid
+                if(message_uid == uidlist[listnum2].number)
+                {
+                    //figure out if it is registed
+                    if(uidlist[listnum2].registed == "no")
+                    {
+                        QByteArray block = pickup_data(tr("SERVER SEND:YOU ARE NOT REGISTED"));
+                        m_ClientList[listnum2]->SendBytes(block);
+                    }
+                    //registed then see items
+                    else
+                    {
+                        //if not have items
+                        if(itemlist.size() < 1)
+                        {
+                            QByteArray block = pickup_data(tr("SERVER SEND:THERE HAVE NO ITEMS NOW"));
+                            m_ClientList[listnum2]->SendBytes(block);
+                            ui->label->setText(temp +tr("CLIENT UID")+message_uid+tr("ASK ALL BID BUT NO ITEMS"));
+                        }
+                        //send all items information
+                        else
+                        {
+                            QString iteminfotemp = tr("SERVER SEND:ALL BID IS BELOW\n<ITSZ>")+QString::number(itemlist.size())+tr("</ITS>");
+                            for(int i = 0;i < itemlist.size();i++)
+                            {
+                                QString temp = iteminfotemp+tr("\n<ITN")+QString::number(i)+tr(">");
+                                iteminfotemp = temp+tr("NAME:")+itemlist[i]->m_name+tr(" PRICE:")+itemlist[i]->m_price+tr(" BUYER:")+itemlist[i]->m_buyer+tr(" OWNER:")+itemlist[i]->m_owner+tr(" ITEMCODE:")+itemlist[i]->m_itemcode+tr("</IT")+QString::number(i)+tr(">");
+
+
+                            }
+                            QByteArray block = pickup_data(iteminfotemp);
+                            m_ClientList[listnum2]->SendBytes(block);
+                            ui->label->setText(temp +tr("CLIENT UID")+message_uid+tr("ASK ALL BID"));
+
+                        }
+                    }
+
+                    break;
+                }
+
+            }
+
+        }
+        //submit an item
+        else if(message_header == "2")
+        {
+            int listnum2;
+            //get the list place
+            for(listnum2 = 0;listnum2<uidlist.size();listnum2++)
+            {
+                //find the uid
+                if(message_uid == uidlist[listnum2].number)
+                {
+                    //figure out if it is registed
+                    if(uidlist[listnum2].registed == "no")
+                    {
+                        QByteArray block = pickup_data(tr("SERVER SEND:YOU ARE NOT REGISTED"));
+                        m_ClientList[listnum2]->SendBytes(block);
+                    }
+                    //registed then see items
+                    else
+                    {
+                    //TO DO
+                    items *newitem = new items(this,message_data,tr("NULL"),message_uid,tr("NULL"),QString::number(ITEM_NUM),tr("NULL"));
+                    ITEM_NUM++;
+                    itemlist.append(newitem);
+                    QString newitemtemp = tr("NAME:")+newitem->m_name+tr(" PRICE:")+newitem->m_price+tr(" BUYER:")+newitem->m_buyer+tr(" OWNER:")+newitem->m_owner+tr(" ITEMCODE:")+newitem->m_itemcode;
+
+                    ui->ItemlistWidget->addItem(newitemtemp);
+                    QByteArray block = pickup_data(tr("SERVER SEND:YOUR ITEM ")+newitem->m_name+tr("SUBMIT SUCCESSED"));
+                    m_ClientList[listnum2]->SendBytes(block);
+
+                    }
+
+                    break;
+                }
+
+            }
+
+        }
         else
         {
             ui->label->setText(temp + data);
@@ -268,5 +356,12 @@ void Server::OneItemTimeout(QString itemcode)
 void Server::on_TestpushButton_2_clicked()
 {
     testitem->SetTimeagain();
+}
+*/
+/*
+void Server::on_testpushButton_clicked()
+{
+    TestDialog *testdialog = new TestDialog(this);
+    testdialog->show();
 }
 */

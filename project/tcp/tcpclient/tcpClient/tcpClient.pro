@@ -11,10 +11,16 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        client.cpp
+        client.cpp \
+    submitdialog.cpp \
+    seeallbiddialog.cpp
 
-HEADERS  += client.h
+HEADERS  += client.h \
+    submitdialog.h \
+    seeallbiddialog.h
 
-FORMS    += client.ui
+FORMS    += client.ui \
+    submitdialog.ui \
+    seeallbiddialog.ui
 
 QT += network

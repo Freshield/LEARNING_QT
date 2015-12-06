@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1231</width>
-    <height>864</height>
+    <width>2050</width>
+    <height>1179</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,9 +17,9 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>410</y>
-     <width>1191</width>
-     <height>431</height>
+     <y>430</y>
+     <width>931</width>
+     <height>711</height>
     </rect>
    </property>
    <property name="frameShape">
@@ -42,9 +42,9 @@
    </property>
    <property name="geometry">
     <rect>
-     <x>780</x>
-     <y>180</y>
-     <width>421</width>
+     <x>1020</x>
+     <y>1050</y>
+     <width>531</width>
      <height>71</height>
     </rect>
    </property>
@@ -58,8 +58,8 @@
    </property>
    <property name="geometry">
     <rect>
-     <x>780</x>
-     <y>300</y>
+     <x>1600</x>
+     <y>1060</y>
      <width>187</width>
      <height>57</height>
     </rect>
@@ -110,10 +110,10 @@
   <widget class="QListWidget" name="listWidget">
    <property name="geometry">
     <rect>
-     <x>90</x>
-     <y>150</y>
-     <width>671</width>
-     <height>251</height>
+     <x>10</x>
+     <y>120</y>
+     <width>931</width>
+     <height>291</height>
     </rect>
    </property>
    <property name="isWrapping" stdset="0">
@@ -129,14 +129,24 @@
    </property>
    <property name="geometry">
     <rect>
-     <x>1020</x>
-     <y>300</y>
+     <x>1850</x>
+     <y>1060</y>
      <width>187</width>
      <height>57</height>
     </rect>
    </property>
    <property name="text">
     <string>send all</string>
+   </property>
+  </widget>
+  <widget class="QListWidget" name="ItemlistWidget">
+   <property name="geometry">
+    <rect>
+     <x>1010</x>
+     <y>10</y>
+     <width>1021</width>
+     <height>1001</height>
+    </rect>
    </property>
   </widget>
  </widget>

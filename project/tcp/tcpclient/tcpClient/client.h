@@ -38,7 +38,12 @@ private slots:
     void on_connectButton_clicked();
     void on_pushButton_clicked();
     void ifconnected();
+    void submititems(QString itemname);
     void on_regist_pushButton_clicked();
+    void on_see_all_bid_pushButton_clicked();
+    void on_submit_pushButton_clicked();
+signals:
+    void allbidinfo(QString data);
 };
 
 #endif // CLIENT_H

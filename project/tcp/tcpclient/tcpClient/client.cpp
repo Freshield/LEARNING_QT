@@ -3,6 +3,8 @@
 
 #include <QtNetwork>
 #include <QMessageBox>
+#include "submitdialog.h"
+#include "seeallbiddialog.h"
 
 Client::Client(QWidget *parent) :
     QDialog(parent),
@@ -78,6 +80,13 @@ void Client::readMessage()
         ui->namelabel->setText(name);
 
         ui->messageLabel->setText(message+tr("\n")+tr("Now you can try to play the game"));
+
+    }
+    //see all bid
+    else if(message.contains("SERVER SEND:ALL BID IS BELOW\n"))
+    {
+        SeeAllBidDialog *newseeallbid = new SeeAllBidDialog(this,message);
+        newseeallbid->show();
 
     }
     else
@@ -166,3 +175,25 @@ QByteArray Client::pickup_data(QString data)
     return block;
 }
 
+
+void Client::on_see_all_bid_pushButton_clicked()
+{
+    QString message = format_message("1",tr("I WANT TO SEE ALL BID"));
+    QByteArray block = pickup_data(message);
+    tcpSocket->write(block);
+}
+
+void Client::on_submit_pushButton_clicked()
+{
+    SubmitDialog *newsubmit = new SubmitDialog(this);
+    connect(newsubmit,SIGNAL(CallMainWindowItemName(QString)),this,SLOT(submititems(QString)));
+    newsubmit->show();
+}
+
+void Client::submititems(QString itemname)
+{
+    QString message = format_message("2",itemname);
+    QByteArray block = pickup_data(message);
+    tcpSocket->write(block);
+    ui->messageLabel->setText(tr("SUBMIT AN ITEM\nNAME IS")+itemname);
+}

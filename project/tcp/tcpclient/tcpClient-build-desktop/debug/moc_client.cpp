@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'client.h'
 **
-** Created: Sat Dec 5 16:55:10 2015
+** Created: Sat Dec 5 20:52:30 2015
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.2)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,31 +23,41 @@ static const uint qt_meta_data_Client[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
+      11,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       0,       // signalCount
+       1,       // signalCount
+
+ // signals: signature, parameters, type, tag, flags
+      13,    8,    7,    7, 0x05,
 
  // slots: signature, parameters, type, tag, flags
-       8,    7,    7,    7, 0x08,
-      21,    7,    7,    7, 0x08,
-      35,    7,    7,    7, 0x08,
-      78,    7,    7,    7, 0x08,
-     105,    7,    7,    7, 0x08,
-     129,    7,    7,    7, 0x08,
-     143,    7,    7,    7, 0x08,
+      33,    7,    7,    7, 0x08,
+      46,    7,    7,    7, 0x08,
+      60,    7,    7,    7, 0x08,
+     103,    7,    7,    7, 0x08,
+     130,    7,    7,    7, 0x08,
+     154,    7,    7,    7, 0x08,
+     177,  168,    7,    7, 0x08,
+     198,    7,    7,    7, 0x08,
+     229,    7,    7,    7, 0x08,
+     265,    7,    7,    7, 0x08,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_Client[] = {
-    "Client\0\0newConnect()\0readMessage()\0"
+    "Client\0\0data\0allbidinfo(QString)\0"
+    "newConnect()\0readMessage()\0"
     "displayError(QAbstractSocket::SocketError)\0"
     "on_connectButton_clicked()\0"
     "on_pushButton_clicked()\0ifconnected()\0"
+    "itemname\0submititems(QString)\0"
     "on_regist_pushButton_clicked()\0"
+    "on_see_all_bid_pushButton_clicked()\0"
+    "on_submit_pushButton_clicked()\0"
 };
 
 const QMetaObject Client::staticMetaObject = {
@@ -79,17 +89,28 @@ int Client::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
-        case 0: newConnect(); break;
-        case 1: readMessage(); break;
-        case 2: displayError((*reinterpret_cast< QAbstractSocket::SocketError(*)>(_a[1]))); break;
-        case 3: on_connectButton_clicked(); break;
-        case 4: on_pushButton_clicked(); break;
-        case 5: ifconnected(); break;
-        case 6: on_regist_pushButton_clicked(); break;
+        case 0: allbidinfo((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 1: newConnect(); break;
+        case 2: readMessage(); break;
+        case 3: displayError((*reinterpret_cast< QAbstractSocket::SocketError(*)>(_a[1]))); break;
+        case 4: on_connectButton_clicked(); break;
+        case 5: on_pushButton_clicked(); break;
+        case 6: ifconnected(); break;
+        case 7: submititems((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 8: on_regist_pushButton_clicked(); break;
+        case 9: on_see_all_bid_pushButton_clicked(); break;
+        case 10: on_submit_pushButton_clicked(); break;
         default: ;
         }
-        _id -= 7;
+        _id -= 11;
     }
     return _id;
+}
+
+// SIGNAL 0
+void Client::allbidinfo(QString _t1)
+{
+    void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 QT_END_MOC_NAMESPACE
