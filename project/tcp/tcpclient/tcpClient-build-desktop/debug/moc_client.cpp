@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'client.h'
 **
-** Created: Sun Dec 6 13:31:45 2015
+** Created: Sun Dec 6 14:01:31 2015
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.2)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_Client[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-      14,   14, // methods
+      16,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -47,6 +47,8 @@ static const uint qt_meta_data_Client[] = {
      313,    7,    7,    7, 0x08,
      344,    7,    7,    7, 0x08,
      372,    7,    7,    7, 0x08,
+     413,    7,    7,    7, 0x08,
+     446,    7,    7,    7, 0x08,
 
        0        // eod
 };
@@ -64,6 +66,8 @@ static const char qt_meta_stringdata_Client[] = {
     "on_submit_pushButton_clicked()\0"
     "on_bid_pushButton_clicked()\0"
     "on_see_all_your_bid_pushButton_clicked()\0"
+    "on_withdraw_pushButton_clicked()\0"
+    "on_see_all_your_item_pushButton_clicked()\0"
 };
 
 const QMetaObject Client::staticMetaObject = {
@@ -109,9 +113,11 @@ int Client::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 11: on_submit_pushButton_clicked(); break;
         case 12: on_bid_pushButton_clicked(); break;
         case 13: on_see_all_your_bid_pushButton_clicked(); break;
+        case 14: on_withdraw_pushButton_clicked(); break;
+        case 15: on_see_all_your_item_pushButton_clicked(); break;
         default: ;
         }
-        _id -= 14;
+        _id -= 16;
     }
     return _id;
 }

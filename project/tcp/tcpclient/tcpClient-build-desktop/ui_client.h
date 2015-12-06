@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'client.ui'
 **
-** Created: Sat Dec 5 19:10:11 2015
+** Created: Sun Dec 6 14:01:30 2015
 **      by: Qt User Interface Compiler version 4.7.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -45,12 +45,13 @@ public:
     QPushButton *withdraw_pushButton;
     QLabel *label_5;
     QLabel *namelabel;
+    QPushButton *see_all_your_item_pushButton;
 
     void setupUi(QDialog *Client)
     {
         if (Client->objectName().isEmpty())
             Client->setObjectName(QString::fromUtf8("Client"));
-        Client->resize(1027, 818);
+        Client->resize(1028, 863);
         label = new QLabel(Client);
         label->setObjectName(QString::fromUtf8("label"));
         label->setGeometry(QRect(120, 90, 116, 34));
@@ -59,7 +60,7 @@ public:
         label_2->setGeometry(QRect(120, 160, 116, 34));
         messageLabel = new QLabel(Client);
         messageLabel->setObjectName(QString::fromUtf8("messageLabel"));
-        messageLabel->setGeometry(QRect(20, 240, 751, 441));
+        messageLabel->setGeometry(QRect(20, 240, 751, 511));
         QFont font;
         font.setFamily(QString::fromUtf8("Consolas"));
         font.setPointSize(12);
@@ -82,14 +83,14 @@ public:
         pushButton = new QPushButton(Client);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
         pushButton->setEnabled(false);
-        pushButton->setGeometry(QRect(800, 720, 201, 61));
+        pushButton->setGeometry(QRect(800, 790, 201, 61));
         sendLineEdit = new QLineEdit(Client);
         sendLineEdit->setObjectName(QString::fromUtf8("sendLineEdit"));
         sendLineEdit->setEnabled(false);
-        sendLineEdit->setGeometry(QRect(240, 710, 471, 51));
+        sendLineEdit->setGeometry(QRect(240, 780, 471, 51));
         label_3 = new QLabel(Client);
         label_3->setObjectName(QString::fromUtf8("label_3"));
-        label_3->setGeometry(QRect(120, 720, 116, 34));
+        label_3->setGeometry(QRect(120, 790, 116, 34));
         label_4 = new QLabel(Client);
         label_4->setObjectName(QString::fromUtf8("label_4"));
         label_4->setGeometry(QRect(30, 10, 61, 31));
@@ -119,7 +120,7 @@ public:
         deregist_pushButton = new QPushButton(Client);
         deregist_pushButton->setObjectName(QString::fromUtf8("deregist_pushButton"));
         deregist_pushButton->setEnabled(false);
-        deregist_pushButton->setGeometry(QRect(800, 590, 201, 61));
+        deregist_pushButton->setGeometry(QRect(800, 720, 201, 61));
         withdraw_pushButton = new QPushButton(Client);
         withdraw_pushButton->setObjectName(QString::fromUtf8("withdraw_pushButton"));
         withdraw_pushButton->setEnabled(false);
@@ -130,6 +131,10 @@ public:
         namelabel = new QLabel(Client);
         namelabel->setObjectName(QString::fromUtf8("namelabel"));
         namelabel->setGeometry(QRect(100, 50, 116, 34));
+        see_all_your_item_pushButton = new QPushButton(Client);
+        see_all_your_item_pushButton->setObjectName(QString::fromUtf8("see_all_your_item_pushButton"));
+        see_all_your_item_pushButton->setEnabled(false);
+        see_all_your_item_pushButton->setGeometry(QRect(800, 580, 201, 61));
 
         retranslateUi(Client);
 
@@ -164,6 +169,7 @@ public:
         withdraw_pushButton->setText(QApplication::translate("Client", "withdraw item", 0, QApplication::UnicodeUTF8));
         label_5->setText(QApplication::translate("Client", "name:", 0, QApplication::UnicodeUTF8));
         namelabel->setText(QString());
+        see_all_your_item_pushButton->setText(QApplication::translate("Client", "see all you item", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

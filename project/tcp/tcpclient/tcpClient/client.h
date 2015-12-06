@@ -50,6 +50,10 @@ private slots:
 
     void on_see_all_your_bid_pushButton_clicked();
 
+    void on_withdraw_pushButton_clicked();
+
+    void on_see_all_your_item_pushButton_clicked();
+
 signals:
     void allbidinfo(QString data);
 };

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1027</width>
-    <height>818</height>
+    <width>1028</width>
+    <height>863</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -45,7 +45,7 @@
      <x>20</x>
      <y>240</y>
      <width>751</width>
-     <height>441</height>
+     <height>511</height>
     </rect>
    </property>
    <property name="font">
@@ -121,7 +121,7 @@ to connect to the server</string>
    <property name="geometry">
     <rect>
      <x>800</x>
-     <y>720</y>
+     <y>790</y>
      <width>201</width>
      <height>61</height>
     </rect>
@@ -137,7 +137,7 @@ to connect to the server</string>
    <property name="geometry">
     <rect>
      <x>240</x>
-     <y>710</y>
+     <y>780</y>
      <width>471</width>
      <height>51</height>
     </rect>
@@ -150,7 +150,7 @@ to connect to the server</string>
    <property name="geometry">
     <rect>
      <x>120</x>
-     <y>720</y>
+     <y>790</y>
      <width>116</width>
      <height>34</height>
     </rect>
@@ -272,7 +272,7 @@ to connect to the server</string>
    <property name="geometry">
     <rect>
      <x>800</x>
-     <y>590</y>
+     <y>720</y>
      <width>201</width>
      <height>61</height>
     </rect>
@@ -321,6 +321,22 @@ to connect to the server</string>
    </property>
    <property name="text">
     <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="see_all_your_item_pushButton">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>800</x>
+     <y>580</y>
+     <width>201</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>see all you item</string>
    </property>
   </widget>
  </widget>

@@ -78,6 +78,7 @@ void Client::readMessage()
         ui->submit_pushButton->setEnabled(true);
         ui->deregist_pushButton->setEnabled(true);
         ui->withdraw_pushButton->setEnabled(true);
+        ui->see_all_your_item_pushButton->setEnabled(true);
         ui->namelabel->setText(name);
 
         ui->messageLabel->setText(message+tr("\n")+tr("Now you can try to play the game"));
@@ -105,6 +106,14 @@ void Client::readMessage()
         SeeAllBidDialog *newseeallbid = new SeeAllBidDialog(this,message);
         newseeallbid->show();
         ui->messageLabel->setText("SERVER SEND:ALL BID IS BELOW");
+
+    }
+    //see client's item
+    else if(message.contains("SERVER SEND:ALL ITEM BELONG TO YOU IS BELOW\n"))
+    {
+        SeeAllBidDialog *newseeallbid = new SeeAllBidDialog(this,message);
+        newseeallbid->show();
+        ui->messageLabel->setText("SERVER SEND:ALL ITEM IS BELOW");
 
     }
     else
@@ -238,6 +247,18 @@ void Client::getbiditem(QString itemscode, QString itemprice)
 void Client::on_see_all_your_bid_pushButton_clicked()
 {
     QString message = format_message("4",tr("I WANT TO SEE ALL MY BID"));
+    QByteArray block = pickup_data(message);
+    tcpSocket->write(block);
+}
+
+void Client::on_withdraw_pushButton_clicked()
+{
+
+}
+
+void Client::on_see_all_your_item_pushButton_clicked()
+{
+    QString message = format_message("5",tr("I WANT TO SEE ALL MY SALE"));
     QByteArray block = pickup_data(message);
     tcpSocket->write(block);
 }
