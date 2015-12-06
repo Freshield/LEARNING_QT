@@ -304,7 +304,7 @@ void Server::readMessage(QString strIPandPort,QString data)
                     else
                     {
                     //TO DO
-                    items *newitem = new items(this,message_data,tr("NULL"),message_uid,tr("NULL"),QString::number(ITEM_NUM),tr("NULL"));
+                    items *newitem = new items(this,message_data,tr("NULL"),message_uid,tr("0"),QString::number(ITEM_NUM),tr("NULL"));
                     ITEM_NUM++;
                     itemlist.append(newitem);
                     QString newitemtemp = tr("NAME:")+newitem->m_name+tr(" PRICE:")+newitem->m_price+tr(" BUYER:")+newitem->m_buyer+tr(" OWNER:")+newitem->m_owner+tr(" ITEMCODE:")+newitem->m_itemcode;
@@ -408,8 +408,6 @@ void Server::readMessage(QString strIPandPort,QString data)
                         //TO DO
                             QString biditemcode = message_data.mid(message_data.indexOf("<itecod>")+8,message_data.indexOf("</iteco>")-message_data.indexOf("<itecod>")-8);
                             QString biditemprice = message_data.mid(message_data.indexOf("<itepri>")+8,message_data.indexOf("</itepr>")-message_data.indexOf("<itepri>")-8);
-                            qDebug()<<biditemcode;
-                            qDebug()<<biditemprice;
                             int ifgetitem = 0;
                             for(int i = 0;i < itemlist.size();i++)
                             {

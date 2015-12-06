@@ -25,6 +25,7 @@ private:
     Ui::BidItemDialog *ui;
     QString biditeminfo;
     QString m_itemscode;
+    QString m_itemprice;
 signals:
     void biditemsinfo(QString itemcode,QString price);
 };
