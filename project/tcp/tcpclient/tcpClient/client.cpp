@@ -91,12 +91,21 @@ void Client::readMessage()
         ui->messageLabel->setText("SERVER SEND:ALL BID IS BELOW");
 
     }
+    //want a bid
     else if(message.contains("SERVER SEND:ALL ITEM YOU CAN BID IS BELOW\n"))
     {
         BidItemDialog *newbiditem = new BidItemDialog(this,message);
         connect(newbiditem,SIGNAL(biditemsinfo(QString,QString)),this,SLOT(getbiditem(QString,QString)),Qt::QueuedConnection);
         newbiditem->show();
         ui->messageLabel->setText("SERVER SEND:GET BID ITEM");
+    }
+    //see client's bid
+    else if(message.contains("SERVER SEND:ALL ITEM YOUR BID IS BELOW\n"))
+    {
+        SeeAllBidDialog *newseeallbid = new SeeAllBidDialog(this,message);
+        newseeallbid->show();
+        ui->messageLabel->setText("SERVER SEND:ALL BID IS BELOW");
+
     }
     else
     {
@@ -224,4 +233,11 @@ void Client::getbiditem(QString itemscode, QString itemprice)
     QByteArray block = pickup_data(message);
     tcpSocket->write(block);
 
+}
+
+void Client::on_see_all_your_bid_pushButton_clicked()
+{
+    QString message = format_message("4",tr("I WANT TO SEE ALL MY BID"));
+    QByteArray block = pickup_data(message);
+    tcpSocket->write(block);
 }
