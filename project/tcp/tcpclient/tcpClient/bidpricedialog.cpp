@@ -6,8 +6,11 @@ BidPriceDialog::BidPriceDialog(QWidget *parent,QString parentuid) :
     QDialog(parent),
     ui(new Ui::BidPriceDialog)
 {
+
+
     ui->setupUi(this);
     m_parentuid = parentuid;
+    ui->lineEdit->setValidator(new QIntValidator(0, 999999999, this));
 }
 
 BidPriceDialog::~BidPriceDialog()

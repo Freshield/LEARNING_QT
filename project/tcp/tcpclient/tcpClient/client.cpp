@@ -13,6 +13,7 @@ Client::Client(QWidget *parent) :
     ui(new Ui::Client)
 {
     ui->setupUi(this);
+    ui->portLineEdit->setValidator(new QIntValidator(0, 65535, this));
     /*
     tcpSocket = new QTcpSocket(this);
     uidnum = "NULL";

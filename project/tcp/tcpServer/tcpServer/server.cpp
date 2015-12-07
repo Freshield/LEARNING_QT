@@ -14,6 +14,7 @@ Server::Server(QWidget *parent) :
     ui(new Ui::Server)
 {
     ui->setupUi(this);
+    ui->PortLineEdit->setValidator(new QIntValidator(0, 65535, this));
     UID_NUM = 100;
     ITEM_NUM = 1000;
     //create new server
