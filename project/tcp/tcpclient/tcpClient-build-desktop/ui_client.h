@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'client.ui'
 **
-** Created: Sun Dec 6 22:11:10 2015
+** Created: Mon Dec 7 13:58:37 2015
 **      by: Qt User Interface Compiler version 4.7.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -51,7 +51,7 @@ public:
     {
         if (Client->objectName().isEmpty())
             Client->setObjectName(QString::fromUtf8("Client"));
-        Client->resize(1028, 863);
+        Client->resize(1000, 714);
         QPalette palette;
         QBrush brush(QColor(0, 0, 0, 255));
         brush.setStyle(Qt::SolidPattern);
@@ -115,13 +115,13 @@ public:
         Client->setPalette(palette);
         label = new QLabel(Client);
         label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(120, 90, 116, 34));
+        label->setGeometry(QRect(160, 20, 81, 31));
         label_2 = new QLabel(Client);
         label_2->setObjectName(QString::fromUtf8("label_2"));
-        label_2->setGeometry(QRect(120, 160, 116, 34));
+        label_2->setGeometry(QRect(160, 70, 81, 31));
         messageLabel = new QLabel(Client);
         messageLabel->setObjectName(QString::fromUtf8("messageLabel"));
-        messageLabel->setGeometry(QRect(20, 240, 751, 511));
+        messageLabel->setGeometry(QRect(0, 130, 751, 511));
         QPalette palette1;
         palette1.setBrush(QPalette::Active, QPalette::Text, brush);
         palette1.setBrush(QPalette::Active, QPalette::BrightText, brush);
@@ -153,10 +153,10 @@ public:
         messageLabel->setWordWrap(true);
         connectButton = new QPushButton(Client);
         connectButton->setObjectName(QString::fromUtf8("connectButton"));
-        connectButton->setGeometry(QRect(800, 60, 191, 61));
+        connectButton->setGeometry(QRect(800, 10, 191, 61));
         hostLineEdit = new QLineEdit(Client);
         hostLineEdit->setObjectName(QString::fromUtf8("hostLineEdit"));
-        hostLineEdit->setGeometry(QRect(240, 70, 491, 51));
+        hostLineEdit->setGeometry(QRect(240, 10, 491, 51));
         QPalette palette2;
         palette2.setBrush(QPalette::Active, QPalette::WindowText, brush);
         palette2.setBrush(QPalette::Active, QPalette::Text, brush);
@@ -167,7 +167,7 @@ public:
         hostLineEdit->setPalette(palette2);
         portLineEdit = new QLineEdit(Client);
         portLineEdit->setObjectName(QString::fromUtf8("portLineEdit"));
-        portLineEdit->setGeometry(QRect(240, 160, 491, 51));
+        portLineEdit->setGeometry(QRect(230, 70, 491, 51));
         QPalette palette3;
         palette3.setBrush(QPalette::Active, QPalette::Text, brush);
         palette3.setBrush(QPalette::Inactive, QPalette::Text, brush);
@@ -176,11 +176,11 @@ public:
         pushButton = new QPushButton(Client);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
         pushButton->setEnabled(false);
-        pushButton->setGeometry(QRect(800, 790, 201, 61));
+        pushButton->setGeometry(QRect(790, 620, 201, 61));
         sendLineEdit = new QLineEdit(Client);
         sendLineEdit->setObjectName(QString::fromUtf8("sendLineEdit"));
         sendLineEdit->setEnabled(false);
-        sendLineEdit->setGeometry(QRect(240, 780, 471, 51));
+        sendLineEdit->setGeometry(QRect(170, 650, 471, 51));
         QPalette palette4;
         palette4.setBrush(QPalette::Active, QPalette::Text, brush);
         palette4.setBrush(QPalette::Inactive, QPalette::Text, brush);
@@ -188,51 +188,51 @@ public:
         sendLineEdit->setPalette(palette4);
         label_3 = new QLabel(Client);
         label_3->setObjectName(QString::fromUtf8("label_3"));
-        label_3->setGeometry(QRect(120, 790, 116, 34));
+        label_3->setGeometry(QRect(30, 660, 116, 34));
         label_4 = new QLabel(Client);
         label_4->setObjectName(QString::fromUtf8("label_4"));
-        label_4->setGeometry(QRect(30, 10, 61, 31));
+        label_4->setGeometry(QRect(30, 10, 51, 21));
         uidnum_label = new QLabel(Client);
         uidnum_label->setObjectName(QString::fromUtf8("uidnum_label"));
-        uidnum_label->setGeometry(QRect(90, 10, 116, 34));
+        uidnum_label->setGeometry(QRect(90, 10, 81, 21));
         regist_pushButton = new QPushButton(Client);
         regist_pushButton->setObjectName(QString::fromUtf8("regist_pushButton"));
         regist_pushButton->setEnabled(false);
-        regist_pushButton->setGeometry(QRect(796, 240, 201, 61));
+        regist_pushButton->setGeometry(QRect(790, 70, 201, 61));
         see_all_bid_pushButton = new QPushButton(Client);
         see_all_bid_pushButton->setObjectName(QString::fromUtf8("see_all_bid_pushButton"));
         see_all_bid_pushButton->setEnabled(false);
-        see_all_bid_pushButton->setGeometry(QRect(796, 310, 201, 61));
+        see_all_bid_pushButton->setGeometry(QRect(790, 140, 201, 61));
         submit_pushButton = new QPushButton(Client);
         submit_pushButton->setObjectName(QString::fromUtf8("submit_pushButton"));
         submit_pushButton->setEnabled(false);
-        submit_pushButton->setGeometry(QRect(796, 380, 201, 61));
+        submit_pushButton->setGeometry(QRect(790, 210, 201, 61));
         bid_pushButton = new QPushButton(Client);
         bid_pushButton->setObjectName(QString::fromUtf8("bid_pushButton"));
         bid_pushButton->setEnabled(false);
-        bid_pushButton->setGeometry(QRect(800, 450, 201, 61));
+        bid_pushButton->setGeometry(QRect(790, 280, 201, 61));
         see_all_your_bid_pushButton = new QPushButton(Client);
         see_all_your_bid_pushButton->setObjectName(QString::fromUtf8("see_all_your_bid_pushButton"));
         see_all_your_bid_pushButton->setEnabled(false);
-        see_all_your_bid_pushButton->setGeometry(QRect(800, 520, 201, 61));
+        see_all_your_bid_pushButton->setGeometry(QRect(790, 350, 201, 61));
         deregist_pushButton = new QPushButton(Client);
         deregist_pushButton->setObjectName(QString::fromUtf8("deregist_pushButton"));
         deregist_pushButton->setEnabled(false);
-        deregist_pushButton->setGeometry(QRect(800, 720, 201, 61));
+        deregist_pushButton->setGeometry(QRect(790, 550, 201, 61));
         withdraw_pushButton = new QPushButton(Client);
         withdraw_pushButton->setObjectName(QString::fromUtf8("withdraw_pushButton"));
         withdraw_pushButton->setEnabled(false);
-        withdraw_pushButton->setGeometry(QRect(800, 650, 201, 61));
+        withdraw_pushButton->setGeometry(QRect(790, 480, 201, 61));
         label_5 = new QLabel(Client);
         label_5->setObjectName(QString::fromUtf8("label_5"));
-        label_5->setGeometry(QRect(10, 50, 116, 34));
+        label_5->setGeometry(QRect(10, 40, 71, 31));
         namelabel = new QLabel(Client);
         namelabel->setObjectName(QString::fromUtf8("namelabel"));
-        namelabel->setGeometry(QRect(100, 50, 116, 34));
+        namelabel->setGeometry(QRect(80, 50, 61, 21));
         see_all_your_item_pushButton = new QPushButton(Client);
         see_all_your_item_pushButton->setObjectName(QString::fromUtf8("see_all_your_item_pushButton"));
         see_all_your_item_pushButton->setEnabled(false);
-        see_all_your_item_pushButton->setGeometry(QRect(800, 580, 201, 61));
+        see_all_your_item_pushButton->setGeometry(QRect(790, 420, 201, 61));
 
         retranslateUi(Client);
 
