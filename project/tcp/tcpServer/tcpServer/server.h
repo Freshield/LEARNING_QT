@@ -9,6 +9,7 @@
 #include <QStringList>
 #include "clientjobs.h"
 #include "items.h"
+#include <QFile>
 
 class QTcpServer;
 

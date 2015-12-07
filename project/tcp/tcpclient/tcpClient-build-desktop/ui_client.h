@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'client.ui'
 **
-** Created: Sun Dec 6 20:20:50 2015
+** Created: Sun Dec 6 22:11:10 2015
 **      by: Qt User Interface Compiler version 4.7.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -251,7 +251,7 @@ public:
 "then press connect button\n"
 "to connect to the server", 0, QApplication::UnicodeUTF8));
         connectButton->setText(QApplication::translate("Client", "connect", 0, QApplication::UnicodeUTF8));
-        hostLineEdit->setText(QApplication::translate("Client", "127.0.0.1", 0, QApplication::UnicodeUTF8));
+        hostLineEdit->setText(QApplication::translate("Client", "192.168.0.233", 0, QApplication::UnicodeUTF8));
         portLineEdit->setText(QApplication::translate("Client", "2333", 0, QApplication::UnicodeUTF8));
         pushButton->setText(QApplication::translate("Client", "send", 0, QApplication::UnicodeUTF8));
         sendLineEdit->setText(QString());

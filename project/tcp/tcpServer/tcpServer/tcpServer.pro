@@ -22,3 +22,5 @@ HEADERS  += server.h \
 FORMS    += server.ui
 
 QT += network
+
+RC_FILE += myico.rc

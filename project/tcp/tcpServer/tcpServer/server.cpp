@@ -7,6 +7,7 @@
 #include <QDebug>
 #include "clientjobs.h"
 #include "items.h"
+#include <QFile>
 
 
 Server::Server(QWidget *parent) :
@@ -119,6 +120,16 @@ void Server::onNewConnection()
     connect(newClientJobs,SIGNAL(CallMainWindowDeleteClient(QString)),this,SLOT(DeleteOneClient(QString)));
     //connect read slot
     connect(newClientJobs,SIGNAL(CallMainWindowReadData(QString,QString)),this,SLOT(readMessage(QString,QString)));
+    //output file
+    QFile uidfile("uidlog.txt");
+    uidfile.open(QIODevice::Text | QIODevice::WriteOnly);
+    QDataStream outuid(&uidfile);
+    QString uidstring = "ALL UID MEMBER IS BELOW\n";
+    for(int i = 0;i<uidlist.size();i++)
+    {
+        uidstring = uidstring + tr("NAME:") + uidlist[i].name + tr(" NUMBER") + uidlist[i].number + tr(" REGISTED") + uidlist[i].registed + tr(" STRIPANDPORT") + uidlist[i].strIPandPort + tr("\n");
+    }
+    outuid << uidstring;
 
 }
 
@@ -190,6 +201,7 @@ void Server::DeleteOneClient(QString strIPandPort)
     delete m_ClientList[m_Index];
     m_ClientList.removeAt(m_Index);
     uidlist.removeAt(m_Index);
+
 }
 
 void Server::on_send_all_pushButton_clicked()
@@ -928,6 +940,27 @@ void Server::readMessage(QString strIPandPort,QString data)
         ui->label->setText(data+temp);
 
     }
+    //output file
+    QFile uidfile("uidlog.txt");
+    QFile itemfile("itemlog.txt");
+    uidfile.open(QIODevice::Text | QIODevice::WriteOnly);
+    itemfile.open(QIODevice::Text | QIODevice::WriteOnly);
+    QDataStream outuid(&uidfile);
+    QDataStream outitem(&itemfile);
+    QString uidstring = "ALL UID MEMBER IS BELOW\n";
+    QString itemstring= "ALL ITEM MEMBER IS BELOW\n";
+    for(int i = 0;i<uidlist.size();i++)
+    {
+        uidstring = uidstring + tr("NAME:") + uidlist[i].name + tr(" NUMBER") + uidlist[i].number + tr(" REGISTED") + uidlist[i].registed + tr(" STRIPANDPORT") + uidlist[i].strIPandPort + tr("\n");
+    }
+    for(int i = 0;i<itemlist.size();i++)
+    {
+        itemstring = itemstring + tr("NAME:")+itemlist[i]->m_name+tr(" PRICE:")+itemlist[i]->m_price+tr(" BUYER:")+itemlist[i]->m_buyer+tr(" OWNER:")+itemlist[i]->m_owner+tr(" ITEMCODE:")+itemlist[i]->m_itemcode + tr("\n");
+
+    }
+    outuid << uidstring;
+    outitem << itemstring;
+
 
 
 }

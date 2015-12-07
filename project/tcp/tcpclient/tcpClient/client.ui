@@ -722,7 +722,7 @@ to connect to the server</string>
     </palette>
    </property>
    <property name="text">
-    <string>127.0.0.1</string>
+    <string>192.168.0.233</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="portLineEdit">

@@ -33,3 +33,5 @@ FORMS    += client.ui \
     withdrawitemdialog.ui
 
 QT += network
+
+RC_FILE += myico.rc
