@@ -199,6 +199,22 @@ void Client::readMessage()
         ui->messageLabel->setText("SERVER SEND:YOUR ITEM WAS REFRESH CAUSE THE BUYER SHUTDOWN\n");
         QMessageBox::warning(this,tr("Item refersh"),iteminfo);
     }
+    //someone submit an item
+    else if(message.contains("SERVER SEND:AN ITEM SUBMIT\n"))
+    {
+        QString iteminfo = tr("The item infomation is below\n")+message.mid(message.indexOf("\n")+1,message.size()-message.indexOf("\n")-1);
+
+        ui->messageLabel->setText("SERVER SEND:AN ITEM SUBMIT\n");
+        QMessageBox::warning(this,tr("Item submit"),iteminfo);
+    }
+    //someitem price changed
+    else if(message.contains("SERVER SEND:AN ITEM PRICE CHANGED\n"))
+    {
+        QString iteminfo = tr("The item infomation is below\n")+message.mid(message.indexOf("\n")+1,message.size()-message.indexOf("\n")-1);
+
+        ui->messageLabel->setText("SERVER SEND:AN ITEM PRICE CHANGED\n");
+        QMessageBox::warning(this,tr("Item price changed"),iteminfo);
+    }
     else
     {
         ui->messageLabel->setText(message);

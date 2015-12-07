@@ -369,6 +369,14 @@ void Server::readMessage(QString strIPandPort,QString data)
                     QByteArray block = pickup_data(tr("SERVER SEND:YOUR ITEM ")+newitem->m_name+tr("\nSUBMIT SUCCESSED"));
                     m_ClientList[listnum2]->SendBytes(block);
                     connect(newitem,SIGNAL(CallMainWindowTimeout(QString)),this,SLOT(itemtimeout(QString)));
+                    for(int i = 0;i<uidlist.size();i++)
+                    {
+                        if(uidlist[i].registed == "yes" && uidlist[i].number != message_uid)
+                        {
+                            QByteArray block = pickup_data(tr("SERVER SEND:AN ITEM SUBMIT\n")+newitemtemp);
+                            m_ClientList[i]->SendBytes(block);
+                        }
+                    }
 
                     }
 
@@ -509,6 +517,14 @@ void Server::readMessage(QString strIPandPort,QString data)
                                 }
                                 block = pickup_data(tr("SERVER SEND:YOUR ITEM HAVE BID\n")+itemtemp);
                                 m_ClientList[listowner]->SendBytes(block);
+                                for(int i = 0;i<uidlist.size();i++)
+                                {
+                                    if(uidlist[i].registed == "yes" && uidlist[i].number != message_uid && uidlist[i].number != biditemowner)
+                                    {
+                                        QByteArray block = pickup_data(tr("SERVER SEND:AN ITEM PRICE CHANGED\n")+itemtemp);
+                                        m_ClientList[i]->SendBytes(block);
+                                    }
+                                }
                                 ui->label->setText(tr("CLIENT UID")+message_uid+tr("BID SUCCESS")+temp);
                             }
                         }

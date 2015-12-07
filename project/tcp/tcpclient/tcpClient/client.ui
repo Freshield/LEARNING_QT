@@ -624,7 +624,7 @@
     <enum>QFrame::Sunken</enum>
    </property>
    <property name="text">
-    <string>Welcome to the bid system
+    <string>Welcome to the Auction system
 
 write host address
 and the port number

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'client.ui'
 **
-** Created: Sun Dec 6 15:58:07 2015
+** Created: Sun Dec 6 20:20:50 2015
 **      by: Qt User Interface Compiler version 4.7.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -244,7 +244,7 @@ public:
         Client->setWindowTitle(QApplication::translate("Client", "Client", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("Client", "host:", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("Client", "port:", 0, QApplication::UnicodeUTF8));
-        messageLabel->setText(QApplication::translate("Client", "Welcome to the bid system\n"
+        messageLabel->setText(QApplication::translate("Client", "Welcome to the Auction system\n"
 "\n"
 "write host address\n"
 "and the port number\n"
