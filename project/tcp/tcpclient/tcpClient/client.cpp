@@ -40,6 +40,7 @@ void Client::newConnect()
 
     tcpSocket->abort();
     tcpSocket->connectToHost(ui->hostLineEdit->text(),ui->portLineEdit->text().toInt());
+    connect(tcpSocket,SIGNAL(disconnected()),this,SLOT(serverdisconnect()));
 
 }
 
@@ -161,37 +162,42 @@ void Client::readMessage()
     else if(message.contains("SERVER SEND:YOUR ITEM HAVE BID"))
     {
         QString iteminfo = tr("The bid item infomation is below\n")+message.mid(message.indexOf("\n")+1,message.size()-message.indexOf("\n")-1);
-        QMessageBox::information(this,tr("Bid have"),iteminfo);
+
         ui->messageLabel->setText("SERVER SEND:YOUR ITEM HAVE BID\n");
+        QMessageBox::information(this,tr("Bid have"),iteminfo);
 
     }
     //one item sale success
     else if(message.contains("TRADE SUCCESS\n"))
     {
         QString iteminfo = tr("The item infomation is below\n")+message.mid(message.indexOf("\n")+1,message.size()-message.indexOf("\n")-1);
-        QMessageBox::information(this,tr("Trade success"),iteminfo);
+
         ui->messageLabel->setText("SERVER SEND:YOUR ITEM TRADE SUCCESS\n");
+        QMessageBox::information(this,tr("Trade success"),iteminfo);
     }
     //one item bid success
     else if(message.contains("BID SUCCESS\n"))
     {
         QString iteminfo = tr("The item infomation is below\n")+message.mid(message.indexOf("\n")+1,message.size()-message.indexOf("\n")-1);
-        QMessageBox::information(this,tr("Bid success"),iteminfo);
+
         ui->messageLabel->setText("SERVER SEND:YOUR ITEM BID SUCCESS\n");
+        QMessageBox::information(this,tr("Bid success"),iteminfo);
     }
     //one item buyer is you but canceled cause owner shutdown
     else if(message.contains("WAS CANCELLED CAUSE THE CLIENT SHUTDOWN\n"))
     {
         QString iteminfo = tr("The item infomation is below\n")+message.mid(message.indexOf("\n")+1,message.size()-message.indexOf("\n")-1);
-        QMessageBox::warning(this,tr("Item cancelled"),iteminfo);
+
         ui->messageLabel->setText("SERVER SEND:YOUR BID WAS CANCELLED CAUSE THE CLIENT SHUTDOWN\n");
+        QMessageBox::warning(this,tr("Item cancelled"),iteminfo);
     }
     //one item owner is you but refresh cause buyer shutdown
     else if(message.contains("WAS REFRESH CAUSE THE BUYER SHUTDOWN\n"))
     {
         QString iteminfo = tr("The item infomation is below\n")+message.mid(message.indexOf("\n")+1,message.size()-message.indexOf("\n")-1);
-        QMessageBox::warning(this,tr("Item refersh"),iteminfo);
+
         ui->messageLabel->setText("SERVER SEND:YOUR ITEM WAS REFRESH CAUSE THE BUYER SHUTDOWN\n");
+        QMessageBox::warning(this,tr("Item refersh"),iteminfo);
     }
     else
     {
@@ -206,14 +212,11 @@ void Client::readMessage()
 void Client::displayError(QAbstractSocket::SocketError)
 {
     qDebug() << tcpSocket->errorString();
+    if(tcpSocket->errorString() == "Connection refused")
+    {
+        QMessageBox::warning(this,tr("Server error"),tr("Can not find the server"));
+    }
 }
-
-
-
-
-
-
-
 
 
 void Client::on_connectButton_clicked()
@@ -357,4 +360,27 @@ void Client::on_deregist_pushButton_clicked()
     QString message = format_message("6",tr("I WANT TO DEREGISTER"));
     QByteArray block = pickup_data(message);
     tcpSocket->write(block);
+}
+
+void Client::serverdisconnect()
+{
+   // delete tcpSocket;
+    name = "";
+    uidnum = "NULL";
+    ui->sendLineEdit->setText("");
+    ui->uidnum_label->setText("");
+    ui->namelabel->setText("");
+    ui->sendLineEdit->setEnabled(false);
+    ui->regist_pushButton->setEnabled(false);
+    ui->bid_pushButton->setEnabled(false);
+    ui->see_all_bid_pushButton->setEnabled(false);
+    ui->see_all_your_bid_pushButton->setEnabled(false);
+    ui->submit_pushButton->setEnabled(false);
+    ui->deregist_pushButton->setEnabled(false);
+    ui->withdraw_pushButton->setEnabled(false);
+    ui->see_all_your_item_pushButton->setEnabled(false);
+    ui->connectButton->setEnabled(true);
+    ui->hostLineEdit->setEnabled(true);
+    ui->portLineEdit->setEnabled(true);
+    ui->messageLabel->setText("SERVER DISCONNECT\n");
 }

@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'client.h'
 **
-** Created: Sun Dec 6 14:57:30 2015
+** Created: Sun Dec 6 19:39:39 2015
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.2)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_Client[] = {
        5,       // revision
        0,       // classname
        0,    0, // classinfo
-      18,   14, // methods
+      19,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -44,13 +44,14 @@ static const uint qt_meta_data_Client[] = {
      218,  198,    7,    7, 0x08,
      256,  246,    7,    7, 0x08,
      282,    7,    7,    7, 0x08,
-     313,    7,    7,    7, 0x08,
-     349,    7,    7,    7, 0x08,
-     380,    7,    7,    7, 0x08,
-     408,    7,    7,    7, 0x08,
-     449,    7,    7,    7, 0x08,
-     482,    7,    7,    7, 0x08,
-     524,    7,    7,    7, 0x08,
+     301,    7,    7,    7, 0x08,
+     332,    7,    7,    7, 0x08,
+     368,    7,    7,    7, 0x08,
+     399,    7,    7,    7, 0x08,
+     427,    7,    7,    7, 0x08,
+     468,    7,    7,    7, 0x08,
+     501,    7,    7,    7, 0x08,
+     543,    7,    7,    7, 0x08,
 
        0        // eod
 };
@@ -64,7 +65,7 @@ static const char qt_meta_stringdata_Client[] = {
     "itemname\0submititems(QString)\0"
     "itemscode,itemprice\0getbiditem(QString,QString)\0"
     "itemscode\0withdrawiteminfo(QString)\0"
-    "on_regist_pushButton_clicked()\0"
+    "serverdisconnect()\0on_regist_pushButton_clicked()\0"
     "on_see_all_bid_pushButton_clicked()\0"
     "on_submit_pushButton_clicked()\0"
     "on_bid_pushButton_clicked()\0"
@@ -113,17 +114,18 @@ int Client::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 7: submititems((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 8: getbiditem((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
         case 9: withdrawiteminfo((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 10: on_regist_pushButton_clicked(); break;
-        case 11: on_see_all_bid_pushButton_clicked(); break;
-        case 12: on_submit_pushButton_clicked(); break;
-        case 13: on_bid_pushButton_clicked(); break;
-        case 14: on_see_all_your_bid_pushButton_clicked(); break;
-        case 15: on_withdraw_pushButton_clicked(); break;
-        case 16: on_see_all_your_item_pushButton_clicked(); break;
-        case 17: on_deregist_pushButton_clicked(); break;
+        case 10: serverdisconnect(); break;
+        case 11: on_regist_pushButton_clicked(); break;
+        case 12: on_see_all_bid_pushButton_clicked(); break;
+        case 13: on_submit_pushButton_clicked(); break;
+        case 14: on_bid_pushButton_clicked(); break;
+        case 15: on_see_all_your_bid_pushButton_clicked(); break;
+        case 16: on_withdraw_pushButton_clicked(); break;
+        case 17: on_see_all_your_item_pushButton_clicked(); break;
+        case 18: on_deregist_pushButton_clicked(); break;
         default: ;
         }
-        _id -= 18;
+        _id -= 19;
     }
     return _id;
 }

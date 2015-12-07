@@ -41,6 +41,7 @@ private slots:
     void submititems(QString itemname);
     void getbiditem(QString itemscode,QString itemprice);
     void withdrawiteminfo(QString itemscode);
+    void serverdisconnect();
 
 
 
